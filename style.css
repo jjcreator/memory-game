@@ -3,6 +3,7 @@
     --secondary-color: rgb(218, 197, 7);
     --text-color: black;
     --button-color: lightblue;
+    --starting-background: url(images/tiles.jpg);
 }
 
 * {
@@ -71,7 +72,7 @@ body {
 }
 
 .box {
-    background: linear-gradient(309deg, rgba(59,54,54,1) 37%, rgba(65,32,32,1) 100%);
+    background: var(--starting-background);
     height: 100%; 
     width: 100%;
     align-self: center;
@@ -83,13 +84,18 @@ body {
     
 }
 
+.center {
+    background-position: center;
+    background-size: cover;
+}
+
 .box:hover {
     box-shadow: 0px 0px 10px black;
 }
 
 .found {
-    border: 1px transparent solid;
-    border-radius: 50%;
+    border: 1px black solid;
+    border-radius: 5%;
     pointer-events: none;
     box-shadow: none;
 }

@@ -1,14 +1,14 @@
 // VARIABLES //
 
 let colors = [
-    "yellow",
-    "green",
-    "turquoise",
-    "red",
-    "purple",
-    "gray",
-    "coral",
-    "maroon"
+    "url(images/eagle.jpg)",
+    "url(images/flamingo.jpg)",
+    "url(images/goose.jpg)",
+    "url(images/hawk.jpg)",
+    "url(images/jaskolka.jpg)",
+    "url(images/sowa.jpg)",
+    "url(images/swan.jpg)",
+    "url(images/chick.jpg)"
 ];
 let boxes = document.getElementsByClassName("box");
 let start = document.querySelector("#start");
@@ -20,10 +20,10 @@ let clicks = 0;
 // RESET GAME BOARD, RANDOMIZE POSITION OF COLORS, OPTIONALLY SET RANDOM COLORS
 
 const randomizeColors = () => {
-    colors = [];
+    /*colors = [];
     for (let i=0; i<gameSize/2; i++) {
         colors.push("rgb(" + (Math.floor(Math.random()*255)+1) + "," + (Math.floor(Math.random()*255)+1) + "," + (Math.floor(Math.random()*255)+1) + ")");
-    }
+    }*/
     let usedOnce = [];
     let usedTwice = [];
     randomizedArray = [];
@@ -48,7 +48,9 @@ const reset = () => {
     clicks = 0;
     for (let i=0; i<boxes.length; i++) {
         boxes[i].classList.remove("found");
-        boxes[i].style.backgroundColor = "var(--secondary-color)"
+        boxes[i].style.background = "var(--starting-background)";
+        boxes[i].style.backgroundPosition = "center";
+        boxes[i].style.backgroundSize = "cover";
     }
 }
 
@@ -64,26 +66,20 @@ for (let k=0; k<boxes.length; k++) {
         const colorize = () => {
             for (let n=0; n<boxes.length; n++) {
                 if (!boxes[n].classList.contains("found")) {
-                boxes[n].style.backgroundColor = "var(--secondary-color)";
+                boxes[n].style.background = "var(--starting-background)";
+                boxes[n].style.backgroundPosition = "center";
+                boxes[n].style.backgroundSize = "cover";
                 }
             }
         }
-        for (let j=0; j<boxes.length; j++) {
-            if (boxes[j].style.backgroundColor !="var(--secondary-color)" && !boxes[j].classList.contains("found")) {
-                colorReset++
-            }
-            if (colorReset >2) {
-                colorize();
-                break;
-            }
-
-        }
         if (revealedBoxes.length < 2) {
-            myBox.style.backgroundColor = randomizedArray[num - 1];
+            myBox.style.background = randomizedArray[num - 1];
+            myBox.style.backgroundPosition = "center";
+            myBox.style.backgroundSize = "cover";
             revealedBoxes.push(myBox);
         }
         if (revealedBoxes.length == 2) {
-            if (revealedBoxes[0].style.backgroundColor != revealedBoxes[1].style.backgroundColor) {
+            if (revealedBoxes[0].style.background != revealedBoxes[1].style.background) {
                 revealedBoxes = [];
                 for (let a=0; a<boxes.length; a++) {
                     boxes[a].classList.add("pointer-none")
@@ -95,7 +91,7 @@ for (let k=0; k<boxes.length; k++) {
                     colorize();
                 }, 450);
             }
-            else if (revealedBoxes[0].style.backgroundColor == revealedBoxes[1].style.backgroundColor) {
+            else if (revealedBoxes[0].style.background == revealedBoxes[1].style.background) {
                 revealedBoxes[0].classList.add("found");
                 revealedBoxes[1].classList.add("found");
                 revealedBoxes = [];
