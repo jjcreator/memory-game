@@ -44,7 +44,7 @@ for (let k=0; k<boxes.length; k++) {
         const colorize = () => {
             for (let n=0; n<boxes.length; n++) {
                 if (!boxes[n].classList.contains("found")) {
-                boxes[n].style.backgroundColor = "orange"
+                boxes[n].style.backgroundColor = "var(--secondary-color)";
                 }
             }
         }
@@ -55,19 +55,41 @@ for (let k=0; k<boxes.length; k++) {
         if (revealedBoxes.length == 2) {
             if (revealedBoxes[0].style.backgroundColor != revealedBoxes[1].style.backgroundColor) {
                 revealedBoxes = [];
-                setTimeout(colorize, 750);
+                setTimeout(colorize, 550);
             }
-            if (revealedBoxes[0].style.backgroundColor == revealedBoxes[1].style.backgroundColor) {
+            else if (revealedBoxes[0].style.backgroundColor == revealedBoxes[1].style.backgroundColor) {
                 revealedBoxes[0].classList.add("found");
                 revealedBoxes[1].classList.add("found");
                 revealedBoxes = [];
                 colorize();
+                
             }
     }
+    victoryCheck();
 }
-}
+    )};
 
 randomizeColors();
+const reset = () => {
+    clicks = 0;
+    for (let i=0; i<boxes.length; i++) {
+        boxes[i].classList.remove("found");
+        boxes[i].style.backgroundColor = "var(--secondary-color)"
+    }
+}
 
-let box1 = document.getElementById("box1");
+const victoryCheck = () => {
+    let victory = 0;
+    for (let i=0; i<boxes.length; i++) {
+        if (boxes[i].classList.contains("found")) {
+            victory++;
+        }
+    if (victory == 16) {
+        alert(`Congratulations! You won in ${clicks} clicks`);
+    }
+    }
+}
+
 start.addEventListener("click", randomizeColors);
+start.addEventListener("click", reset)
+
