@@ -61,7 +61,7 @@ body {
 
 #main-grid {
     display: grid;
-    grid-template: repeat(4, 7vw)/repeat(4, 7vw);
+    grid-template: repeat(4, 9vw)/repeat(4, 9vw);
     max-width: fit-content;
     margin: 0 auto;
     height: 100%;
@@ -94,8 +94,8 @@ body {
 }
 
 .found {
-    border: 1px black solid;
-    border-radius: 5%;
+    border: 3px rgb(5, 204, 5) solid;
+    border-radius: 10%;
     pointer-events: none;
     box-shadow: none;
 }

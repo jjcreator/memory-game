@@ -5,7 +5,7 @@ let colors = [
     "url(images/flamingo.jpg)",
     "url(images/goose.jpg)",
     "url(images/hawk.jpg)",
-    "url(images/jaskolka.jpg)",
+    "url(images/swallow.jpg)",
     "url(images/sowa.jpg)",
     "url(images/swan.jpg)",
     "url(images/chick.jpg)"
