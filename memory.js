@@ -93,7 +93,7 @@ for (let k=0; k<boxes.length; k++) {
                         boxes[b].classList.remove("pointer-none");
                     }
                     colorize();
-                }, 350);
+                }, 450);
             }
             else if (revealedBoxes[0].style.backgroundColor == revealedBoxes[1].style.backgroundColor) {
                 revealedBoxes[0].classList.add("found");
