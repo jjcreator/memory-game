@@ -72,10 +72,15 @@ body {
     align-self: center;
     justify-self: center;
     position: relative;
+    
 }
 
 .found {
     border: 1px transparent solid;
     border-radius: 50%;
+    pointer-events: none;
+}
+
+.pointer-none {
     pointer-events: none;
 }

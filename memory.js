@@ -1,3 +1,5 @@
+// VARIABLES //
+
 let colors = [
     "yellow",
     "green",
@@ -14,6 +16,8 @@ let gameSize = 16;
 let randomizedArray = [];
 let revealedBoxes = [];
 let clicks = 0;
+
+// RESET GAME BOARD, RANDOMIZE POSITION OF COLORS, OPTIONALLY SET RANDOM COLORS
 
 const randomizeColors = () => {
     colors = [];
@@ -39,6 +43,16 @@ const randomizeColors = () => {
         }
     }
 }
+
+const reset = () => {
+    clicks = 0;
+    for (let i=0; i<boxes.length; i++) {
+        boxes[i].classList.remove("found");
+        boxes[i].style.backgroundColor = "var(--secondary-color)"
+    }
+}
+
+// CLICK EVENTS FOR BOXES - REVEAL HIDDEN COLOR
 
 for (let k=0; k<boxes.length; k++) {
     boxes[k].addEventListener("click", function() {
@@ -71,7 +85,15 @@ for (let k=0; k<boxes.length; k++) {
         if (revealedBoxes.length == 2) {
             if (revealedBoxes[0].style.backgroundColor != revealedBoxes[1].style.backgroundColor) {
                 revealedBoxes = [];
-                setTimeout(colorize, 555);
+                for (let a=0; a<boxes.length; a++) {
+                    boxes[a].classList.add("pointer-none")
+                }
+                setTimeout(function() {
+                    for (let b=0; b<boxes.length; b++) {
+                        boxes[b].classList.remove("pointer-none");
+                    }
+                    colorize();
+                }, 350);
             }
             else if (revealedBoxes[0].style.backgroundColor == revealedBoxes[1].style.backgroundColor) {
                 revealedBoxes[0].classList.add("found");
@@ -85,14 +107,8 @@ for (let k=0; k<boxes.length; k++) {
 }}
     )};
 
-randomizeColors();
-const reset = () => {
-    clicks = 0;
-    for (let i=0; i<boxes.length; i++) {
-        boxes[i].classList.remove("found");
-        boxes[i].style.backgroundColor = "var(--secondary-color)"
-    }
-}
+
+// CHECK FOR POINTS
 
 const victoryCheck = () => {
     let victory = 0;
@@ -106,6 +122,9 @@ const victoryCheck = () => {
     }
 }
 
+// INITIALIZE GAME
+
 start.addEventListener("click", randomizeColors);
-start.addEventListener("click", reset)
+start.addEventListener("click", reset);
+randomizeColors();
 
