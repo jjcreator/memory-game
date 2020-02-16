@@ -75,6 +75,7 @@ body {
 }
 
 .found {
-    border: 3px transparent solid;
+    border: 1px transparent solid;
     border-radius: 50%;
+    pointer-events: none;
 }

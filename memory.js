@@ -1,12 +1,12 @@
 let colors = [
     "yellow",
     "green",
-    "blue",
+    "turquoise",
     "red",
     "purple",
     "gray",
-    "black",
-    "pink"
+    "coral",
+    "maroon"
 ];
 let boxes = document.getElementsByClassName("box");
 let start = document.querySelector("#start");
@@ -16,6 +16,10 @@ let revealedBoxes = [];
 let clicks = 0;
 
 const randomizeColors = () => {
+    colors = [];
+    for (let i=0; i<gameSize/2; i++) {
+        colors.push("rgb(" + (Math.floor(Math.random()*255)+1) + "," + (Math.floor(Math.random()*255)+1) + "," + (Math.floor(Math.random()*255)+1) + ")");
+    }
     let usedOnce = [];
     let usedTwice = [];
     randomizedArray = [];
@@ -38,7 +42,9 @@ const randomizeColors = () => {
 
 for (let k=0; k<boxes.length; k++) {
     boxes[k].addEventListener("click", function() {
+        if (revealedBoxes[0] != this) {
         clicks++;
+        let colorReset = 0;
         let myBox = this;
         let num = parseInt(this.id.match(/[0-9]+/g));
         const colorize = () => {
@@ -48,6 +54,16 @@ for (let k=0; k<boxes.length; k++) {
                 }
             }
         }
+        for (let j=0; j<boxes.length; j++) {
+            if (boxes[j].style.backgroundColor !="var(--secondary-color)" && !boxes[j].classList.contains("found")) {
+                colorReset++
+            }
+            if (colorReset >2) {
+                colorize();
+                break;
+            }
+
+        }
         if (revealedBoxes.length < 2) {
             myBox.style.backgroundColor = randomizedArray[num - 1];
             revealedBoxes.push(myBox);
@@ -55,7 +71,7 @@ for (let k=0; k<boxes.length; k++) {
         if (revealedBoxes.length == 2) {
             if (revealedBoxes[0].style.backgroundColor != revealedBoxes[1].style.backgroundColor) {
                 revealedBoxes = [];
-                setTimeout(colorize, 550);
+                setTimeout(colorize, 555);
             }
             else if (revealedBoxes[0].style.backgroundColor == revealedBoxes[1].style.backgroundColor) {
                 revealedBoxes[0].classList.add("found");
@@ -64,9 +80,9 @@ for (let k=0; k<boxes.length; k++) {
                 colorize();
                 
             }
-    }
+        }
     victoryCheck();
-}
+}}
     )};
 
 randomizeColors();
