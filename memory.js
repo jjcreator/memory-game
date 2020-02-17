@@ -1,6 +1,6 @@
 // VARIABLES //
 
-let colors = [
+let images = [
     "url(images/eagle.jpg)",
     "url(images/flamingo.jpg)",
     "url(images/goose.jpg)",
@@ -10,6 +10,27 @@ let colors = [
     "url(images/swan.jpg)",
     "url(images/chick.jpg)"
 ];
+let setOne = [
+    "url(images/eagle.jpg)",
+    "url(images/flamingo.jpg)",
+    "url(images/goose.jpg)",
+    "url(images/hawk.jpg)",
+    "url(images/swallow.jpg)",
+    "url(images/sowa.jpg)",
+    "url(images/swan.jpg)",
+    "url(images/chick.jpg)",
+    "url(images/bigowl.jpg)",
+    "url(images/bweagle.jpg)",
+    "url(images/greenbird.jpg)",
+    "url(images/hummingbird.jpg)",
+    "url(images/tinybird.jpg)",
+    "url(images/seagull.jpg)",
+    "url(images/blueparrot.jpg)",
+    "url(images/redparrot.jpg)",
+    "url(images/toucan.jpg)",
+    "url(images/crow.jpg)"
+]
+
 let boxes = document.getElementsByClassName("box");
 let start = document.querySelector("#start");
 let gameSize = 16;
@@ -19,6 +40,17 @@ let clicks = 0;
 let time = document.getElementById("time");
 let elapsed = 0;
 let timing;
+let chosenSet = setOne;
+
+// CREATE A GAME SET 
+
+images = [];
+
+const chooseImages = () => {
+    for (let n=0; n< gameSize / 2 + 1; n++) {
+        images.push(chosenSet[Math.floor(Math.random()*chosenSet.length)]);
+    }
+}
 
 // RESET GAME BOARD, RANDOMIZE POSITION OF COLORS, OPTIONALLY SET RANDOM COLORS
 
@@ -33,7 +65,7 @@ const randomizeColors = () => {
     randomizedArray = [];
     for (let i=0; i<gameSize; i++) {
         while (true) {
-            let color = colors[Math.floor(Math.random()*colors.length)];
+            let color = images[Math.floor(Math.random()*images.length)];
             if (usedOnce.indexOf(color) == -1) {
                 randomizedArray.push(color);
                 usedOnce.push(color);
@@ -48,6 +80,8 @@ const randomizeColors = () => {
     }
 }
 const reset = () => {
+    //timer disappears
+    document.getElementById("timer").style.display = "none";
     //options appear
     document.querySelector("#tile-select").style.display = "flex";
     document.querySelector("#difficulty").style.display = "flex";
@@ -86,6 +120,7 @@ for (let k=0; k<boxes.length; k++) {
         h1.textContent = "Let's go!!!";
         h1.style.animation = "burn 1s linear alternate infinite";
         // starts timer
+        document.getElementById("timer").style.display = "block";
         if (clicks == 0) {
             timing = setInterval(timer, 1000);
         }
@@ -120,7 +155,7 @@ for (let k=0; k<boxes.length; k++) {
                         boxes[b].classList.remove("pointer-none");
                     }
                     colorize();
-                }, 550);
+                }, 450);
             }
             else if (revealedBoxes[0].style.background == revealedBoxes[1].style.background) {
                 revealedBoxes[0].classList.add("found");
@@ -161,6 +196,8 @@ const timer = () => {
 
 start.addEventListener("click", randomizeColors);
 start.addEventListener("click", reset);
+start.addEventListener("click", chooseImages);
+chooseImages();
 randomizeColors();
 
 

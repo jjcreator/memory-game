@@ -1,31 +1,33 @@
+/* ----------General declarations---------- */
 :root {
     --primary-color: rgba(0, 34, 112, 0.4);
     --secondary-color: rgba(97,76,131,1);
     --text-color: white;
     --button-color: rgba(26, 168, 233, 0.6);
-    --starting-background: url(images/tiles.jpg);
+    --starting-background: url(/images/backgrounds/clouds.png);
+    --first-background: url(/images/RLGMLA.png);
+    --second-background: url(/images/backgrounds/stars.jpg);
 }
-
 html {
     height: 100vh;
 }
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     font-family: Arial, Helvetica, sans-serif;
     font-family: 'Tomorrow', sans-serif;
     color: var(--text-color);
     background-color: var(--primary-color);
-    background: url(/images/RLGMLA.png);
+    background: var(--second-background);
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
 }
+
+/* ----------Header menu---------- */
 
 #main-header {
     height: 175px;
@@ -40,6 +42,11 @@ body {
     width: 22%;
 }
 
+#timer {
+    display: none;
+    font-size: 80px;
+}
+
 #main-text {
     flex: 1;
     display: flex;
@@ -48,13 +55,8 @@ body {
     overflow: hidden;
 }
 
-#timer {
-    display: none;
-    font-size: 80px;
-}
-
 #tile-select, #difficulty, #music {
-    display: none;
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
