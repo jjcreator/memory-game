@@ -28,7 +28,7 @@ body {
 }
 
 #main-header {
-    height: 150px;
+    height: 175px;
     background-color: var(--button-color);
     text-align: center;
     display: flex;
@@ -36,13 +36,41 @@ body {
     justify-content: center;
 }
 
+#left-panel {
+    width: 22%;
+}
+
 #main-text {
-    margin-left: 20vw;
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+}
+
+#timer {
+    display: none;
+    font-size: 80px;
+}
+
+#tile-select, #difficulty, #music {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#tile-select p, #difficulty p, #music p {
+    flex: 1;
+    margin-left: 10px;
+}
+
+#music-toggle, #sound-toggle {
+    width: 107px;
+}
+
+.buttons {
+    margin-left: 15px;
+    margin-right: 10px;
 }
 
 #title {
@@ -94,39 +122,53 @@ body {
     }
 }
 
-@keyframes burn {
+/*@keyframes burn {
     0% {
         color: white;
-        font-size: 30px
+        
     }
     50% {
         color:red;
-        font-size: 35px;
+        
     }
     100% {
         color: black;
-        font-size: 40px;
+        
     }
 }
-
-#controls {
-    background-color: rgba(103, 78, 126, 0.4);
+*/
+.controls {
+    background-color: rgba(108, 81, 133, 0.4);
     display: flex;
     flex-direction: column;
     min-width: 20%;
     justify-content: space-around;
 }
 
-#start {
+.game-button {
     background: var(--secondary-color);
+    cursor: pointer;
+    font-family: 'Tomorrow', sans-serif;
+    color: white;
+}
+
+.small {
+    border: 3px outset rgb(64, 50, 87);
+    padding: 5px;
+    margin: 2px 0;
+    width: 70px;
+}
+
+.small:active {
+    border: 3px inset rgb(64, 50, 87);
+}
+
+
+#start {
     border: 5px outset rgb(64, 50, 87);
     margin: 10px auto 0 auto;
     padding: 15px;
-    cursor: pointer;
-    font-family: 'Tomorrow', sans-serif;
     font-size: 18px;
-    border-radius: 20px;
-    color: white;
 
 }
 
@@ -172,7 +214,7 @@ body {
     justify-self: center;
     position: relative;
     cursor: pointer;
-    transition: transform 1s ease-in-out;
+    transition: transform 0.5s ease-in;
     
 }
 

@@ -48,15 +48,22 @@ const randomizeColors = () => {
     }
 }
 const reset = () => {
+    //options appear
+    document.querySelector("#tile-select").style.display = "flex";
+    document.querySelector("#difficulty").style.display = "flex";
+    document.querySelector("#music").style.display = "flex";
+    //time and clicks reset
     clicks = 0;
     clearInterval(timing);
     elapsed = 0;
     time.innerText = "0";
+    //main text resets and animates
     let h1 = document.querySelector("h1");
     h1.style.width = "50vw";
     h1.textContent = "";
     h1.style.animation = "scroll 1s linear infinite alternate";
     h1.classList.add("animated");
+    //boxes are reset
     for (let i=0; i<boxes.length; i++) {
         boxes[i].classList.remove("found");
         boxes[i].style.background = "var(--starting-background)";
@@ -69,6 +76,10 @@ const reset = () => {
 
 for (let k=0; k<boxes.length; k++) {
     boxes[k].addEventListener("click", function() {
+        //makes options disappear
+        document.querySelector("#tile-select").style.display = "none";
+        document.querySelector("#difficulty").style.display = "none";
+        document.querySelector("#music").style.display = "none";
         // disables text animation
         let h1 = document.querySelector("h1");
         h1.classList.remove("animated");
@@ -109,7 +120,7 @@ for (let k=0; k<boxes.length; k++) {
                         boxes[b].classList.remove("pointer-none");
                     }
                     colorize();
-                }, 450);
+                }, 550);
             }
             else if (revealedBoxes[0].style.background == revealedBoxes[1].style.background) {
                 revealedBoxes[0].classList.add("found");

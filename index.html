@@ -9,12 +9,37 @@
 </head>
 <body>
     <header id="main-header">
+        <div class="controls" id="left-panel">
+            <div id="timer"><span id="time">0</span> </div>
+            <div id="tile-select">
+                <p>TILESET:</p>
+                <div class="buttons">
+                    <button class="game-button small" id="first-tileset" type="button">SET 1</button>
+                    <button class="game-button small" id="second-tileset" type="button">SET 2</button>
+                    <button class="game-button small" id="third-tileset" type="button">SET 3</button>
+                </div>
+            </div>
+            <div id="difficulty">
+                <p>DIFFICULTY:</p>
+                <div class="buttons">
+                    <button class="game-button small" id="easy-mode" type="button">EASY</button>
+                    <button class="game-button small" id="medium-mode" type="button">MEDIUM</button>
+                    <button class="game-button small" id="hard-mode" type="button">HARD</button>
+                </div>
+            </div>
+            <div id="music">
+                <p>AUDIO:</p>
+                <div class="buttons">
+                    <button class="game-button small" id="music-toggle" type="button">MUSIC ON/OFF</button>
+                    <button class="game-button small" id="sound-toggle" type="button">SOUND ON/OFF</button>
+                </div>
+            </div>
+        </div>
         <div id="main-text">
             <h1 id="title" class="animated"></h1>
         </div>
-        <div id="controls">
-            <button type="button" id="start">RESET GAME</button>
-            <div id="timer">Time elapsed: <span id="time">0</span> seconds</div>
+        <div class="controls" id="right-panel">
+            <button type="button" id="start" class="game-button">RESET GAME</button>
         </div>
     </header>
     <section id="game">
