@@ -16,10 +16,14 @@ let gameSize = 16;
 let randomizedArray = [];
 let revealedBoxes = [];
 let clicks = 0;
+let time = document.getElementById("time");
+let elapsed = 0;
+let timing;
 
 // RESET GAME BOARD, RANDOMIZE POSITION OF COLORS, OPTIONALLY SET RANDOM COLORS
 
 const randomizeColors = () => {
+    //optional -> random colors instead of images to find
     /*colors = [];
     for (let i=0; i<gameSize/2; i++) {
         colors.push("rgb(" + (Math.floor(Math.random()*255)+1) + "," + (Math.floor(Math.random()*255)+1) + "," + (Math.floor(Math.random()*255)+1) + ")");
@@ -43,9 +47,16 @@ const randomizeColors = () => {
         }
     }
 }
-
 const reset = () => {
     clicks = 0;
+    clearInterval(timing);
+    elapsed = 0;
+    time.innerText = "0";
+    let h1 = document.querySelector("h1");
+    h1.style.width = "50vw";
+    h1.textContent = "";
+    h1.style.animation = "scroll 1s linear infinite alternate";
+    h1.classList.add("animated");
     for (let i=0; i<boxes.length; i++) {
         boxes[i].classList.remove("found");
         boxes[i].style.background = "var(--starting-background)";
@@ -58,6 +69,15 @@ const reset = () => {
 
 for (let k=0; k<boxes.length; k++) {
     boxes[k].addEventListener("click", function() {
+        // disables text animation
+        let h1 = document.querySelector("h1");
+        h1.classList.remove("animated");
+        h1.textContent = "Let's go!!!";
+        h1.style.animation = "burn 1s linear alternate infinite";
+        // starts timer
+        if (clicks == 0) {
+            timing = setInterval(timer, 1000);
+        }
         if (revealedBoxes[0] != this) {
         clicks++;
         let colorReset = 0;
@@ -112,10 +132,18 @@ const victoryCheck = () => {
         if (boxes[i].classList.contains("found")) {
             victory++;
         }
-    if (victory == 16) {
-        alert(`Congratulations! You won in ${clicks} clicks`);
+    if (victory == gameSize) {
+        clearInterval(timing);
+        document.querySelector("h1").style.width = "80vw";
+        document.querySelector("h1").textContent = `Victory! You won in ${elapsed} seconds! It took you ${clicks} clicks.`;
     }
     }
+}
+
+//
+const timer = () => {
+    elapsed++;
+    time.textContent = elapsed.toString();
 }
 
 // INITIALIZE GAME
@@ -123,4 +151,6 @@ const victoryCheck = () => {
 start.addEventListener("click", randomizeColors);
 start.addEventListener("click", reset);
 randomizeColors();
+
+
 

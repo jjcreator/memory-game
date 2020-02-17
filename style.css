@@ -1,9 +1,13 @@
 :root {
-    --primary-color: rgb(117, 107, 107);
-    --secondary-color: rgb(218, 197, 7);
-    --text-color: black;
-    --button-color: lightblue;
+    --primary-color: rgba(0, 34, 112, 0.4);
+    --secondary-color: rgba(97,76,131,1);
+    --text-color: white;
+    --button-color: rgba(26, 168, 233, 0.6);
     --starting-background: url(images/tiles.jpg);
+}
+
+html {
+    height: 100vh;
 }
 
 * {
@@ -17,6 +21,10 @@ body {
     font-family: 'Tomorrow', sans-serif;
     color: var(--text-color);
     background-color: var(--primary-color);
+    background: url(/images/RLGMLA.png);
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
 }
 
 #main-header {
@@ -24,21 +32,101 @@ body {
     background-color: var(--button-color);
     text-align: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
 }
 
-#main-header h1 {
-    padding: 15px;
+#main-text {
+    margin-left: 20vw;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#title {
+    min-width: 50vw;
+}
+
+
+.animated {
+    animation: scroll 1s linear infinite alternate;
+    animation-delay: 2s;
+    transform: translateX(50px);
+    width: 100%;
+    color: transparent;
+}
+
+.animated::before {
+    content: "Welcome to the Memory Game!";
+    color: white;
+    animation: text-change 15s linear infinite normal;
+    animation-delay: 2s;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(50px);
+    }
+
+    100% {
+        transform: translateX(-50px)
+    }
+
+}
+
+@keyframes text-change {
+    0% {
+        content: "Welcome to the Memory Game!"
+    }
+
+    25% {
+        Content: "Click any of the boxes to start"
+    }
+
+    50% {
+        content: "Time will start automatically"
+    }
+
+    75% {
+        content: "Good luck and have fun!"
+    }
+}
+
+@keyframes burn {
+    0% {
+        color: white;
+        font-size: 30px
+    }
+    50% {
+        color:red;
+        font-size: 35px;
+    }
+    100% {
+        color: black;
+        font-size: 40px;
+    }
+}
+
+#controls {
+    background-color: rgba(103, 78, 126, 0.4);
+    display: flex;
+    flex-direction: column;
+    min-width: 20%;
+    justify-content: space-around;
 }
 
 #start {
-    background-color: var(--secondary-color);
-    border: 5px outset yellow;
-    margin: 0 auto;
+    background: var(--secondary-color);
+    border: 5px outset rgb(64, 50, 87);
+    margin: 10px auto 0 auto;
     padding: 15px;
     cursor: pointer;
     font-family: 'Tomorrow', sans-serif;
+    font-size: 18px;
+    border-radius: 20px;
+    color: white;
 
 }
 
@@ -47,11 +135,12 @@ body {
 }
 
 #start:active {
-    border: 5px inset yellow;
+    border: 5px inset rgb(64, 50, 87);
 }
 
 #game {
     width: 100%;
+
 }
 
 #game h2 {
@@ -73,6 +162,8 @@ body {
 
 .box {
     background: var(--starting-background);
+    background-position: center;
+    background-size: cover;
     height: 100%; 
     width: 100%;
     align-self: center;
@@ -81,12 +172,8 @@ body {
     justify-self: center;
     position: relative;
     cursor: pointer;
+    transition: transform 1s ease-in-out;
     
-}
-
-.center {
-    background-position: center;
-    background-size: cover;
 }
 
 .box:hover {
@@ -98,6 +185,7 @@ body {
     border-radius: 10%;
     pointer-events: none;
     box-shadow: none;
+    transform: scale(1.1);
 }
 
 .pointer-none {
