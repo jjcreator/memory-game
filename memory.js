@@ -2,24 +2,24 @@
 
 let images = [];
 let setOne = [
-    "url(images/eagle.jpg)",
-    "url(images/flamingo.jpg)",
-    "url(images/goose.jpg)",
-    "url(images/hawk.jpg)",
-    "url(images/swallow.jpg)",
-    "url(images/sowa.jpg)",
-    "url(images/swan.jpg)",
-    "url(images/chick.jpg)",
-    "url(images/bigowl.jpg)",
-    "url(images/bweagle.jpg)",
-    "url(images/greenbird.jpg)",
-    "url(images/hover.jpg)",
-    "url(images/toucan.jpg)",
-    "url(images/seagull.jpg)",
-    "url(images/smallbird.jpg)",
-    "url(images/redparrot.jpg)",
-    "url(images/blueparrot.jpg)",
-    "url(images/crow.jpg)"
+    "url(images/setOne/eagle.jpg)",
+    "url(images/setOne/flamingo.jpg)",
+    "url(images/setOne/goose.jpg)",
+    "url(images/setOne/hawk.jpg)",
+    "url(images/setOne/swallow.jpg)",
+    "url(images/setOne/sowa.jpg)",
+    "url(images/setOne/swan.jpg)",
+    "url(images/setOne/chick.jpg)",
+    "url(images/setOne/bigowl.jpg)",
+    "url(images/setOne/bweagle.jpg)",
+    "url(images/setOne/greenbird.jpg)",
+    "url(images/setOne/hover.jpg)",
+    "url(images/setOne/toucan.jpg)",
+    "url(images/setOne/seagull.jpg)",
+    "url(images/setOne/smallbird.jpg)",
+    "url(images/setOne/redparrot.jpg)",
+    "url(images/setOne/blueparrot.jpg)",
+    "url(images/setOne/crow.jpg)"
 ]
 
 let boxes = document.getElementsByClassName("box");
@@ -32,6 +32,9 @@ let time = document.getElementById("time");
 let elapsed = 0;
 let timing;
 let chosenSet = setOne;
+let setOneButton = document.getElementById("first-tileset");
+let setTwoButton = document.getElementById("second-tileset");
+let setThreeButton = document.getElementById("third-tileset");
 
 // CREATE A GAME SET 
 
@@ -196,6 +199,15 @@ const timer = () => {
 
 start.addEventListener("click", randomizeColors);
 start.addEventListener("click", reset);
+setOneButton.addEventListener("click", () => {
+    chosenSet = setOne;
+});
+setTwoButton.addEventListener("click", () => {
+    chosenSet = setTwo;
+});
+setThreeButton.addEventListener("click", () => {
+    chosenSet = setThree;
+});
 randomizeColors();
 
 
