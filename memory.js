@@ -22,6 +22,24 @@ let setOne = [
     "url(images/setOne/crow.jpg)"
 ]
 
+let setTwo = [
+    "url(images/setTwo/astronaut.jpg)",
+    "url(images/setTwo/blue.jpg)",
+    "url(images/setTwo/eyes.jpg)",
+    "url(images/setTwo/hole.jpg)",
+    "url(images/setTwo/horizon.jpg)",
+    "url(images/setTwo/moon.jpg)",
+    "url(images/setTwo/moon2.jpg)",
+    "url(images/setTwo/nebula.jpg)",
+    "url(images/setTwo/saturn.jpg)",
+    "url(images/setTwo/scifi2.jpg)",
+    "url(images/setTwo/shuttle.jpg)",
+    "url(images/setTwo/spaceship.jpg)",
+    "url(images/setTwo/spaceship2.jpg)",
+    "url(images/setTwo/station.jpg)",
+    "url(images/setTwo/train.jpg)"
+]
+
 let boxes = document.getElementsByClassName("box");
 let start = document.querySelector("#start");
 let gameSize = 16;
@@ -35,6 +53,7 @@ let chosenSet = setOne;
 let setOneButton = document.getElementById("first-tileset");
 let setTwoButton = document.getElementById("second-tileset");
 let setThreeButton = document.getElementById("third-tileset");
+let chosenTiles = "var(--first-tiles)";
 
 // CREATE A GAME SET 
 
@@ -74,10 +93,6 @@ const randomizeColors = () => {
                 usedTwice.push(image);
                 break;
             }
-            
-            console.log(usedOnce);
-            console.log(usedTwice)
-            x++;
         }
     }
 }
@@ -103,9 +118,7 @@ const reset = () => {
     //boxes are reset
     for (let i=0; i<boxes.length; i++) {
         boxes[i].classList.remove("found");
-        boxes[i].style.background = "var(--starting-background)";
-        boxes[i].style.backgroundPosition = "center";
-        boxes[i].style.backgroundSize = "cover";
+        boxes[i].style.backgroundImage = chosenTiles;
     }
 }
 
@@ -135,20 +148,16 @@ for (let k=0; k<boxes.length; k++) {
         const colorize = () => {
             for (let n=0; n<boxes.length; n++) {
                 if (!boxes[n].classList.contains("found")) {
-                boxes[n].style.background = "var(--starting-background)";
-                boxes[n].style.backgroundPosition = "center";
-                boxes[n].style.backgroundSize = "cover";
+                boxes[n].style.backgroundImage = chosenTiles;
                 }
             }
         }
         if (revealedBoxes.length < 2) {
-            myBox.style.background = randomizedArray[num - 1];
-            myBox.style.backgroundPosition = "center";
-            myBox.style.backgroundSize = "cover";
+            myBox.style.backgroundImage = randomizedArray[num - 1];
             revealedBoxes.push(myBox);
         }
         if (revealedBoxes.length == 2) {
-            if (revealedBoxes[0].style.background != revealedBoxes[1].style.background) {
+            if (revealedBoxes[0].style.backgroundImage != revealedBoxes[1].style.backgroundImage) {
                 revealedBoxes = [];
                 for (let a=0; a<boxes.length; a++) {
                     boxes[a].classList.add("pointer-none")
@@ -160,7 +169,7 @@ for (let k=0; k<boxes.length; k++) {
                     colorize();
                 }, 450);
             }
-            else if (revealedBoxes[0].style.background == revealedBoxes[1].style.background) {
+            else if (revealedBoxes[0].style.backgroundImage == revealedBoxes[1].style.backgroundImage) {
                 revealedBoxes[0].classList.add("found");
                 revealedBoxes[1].classList.add("found");
                 revealedBoxes = [];
@@ -201,12 +210,21 @@ start.addEventListener("click", randomizeColors);
 start.addEventListener("click", reset);
 setOneButton.addEventListener("click", () => {
     chosenSet = setOne;
+    chosenTiles = "var(--first-tiles)";
+    reset();
+    randomizeColors();
+    document.querySelector("body").style.backgroundImage = "var(--first-background)";
 });
 setTwoButton.addEventListener("click", () => {
     chosenSet = setTwo;
+    chosenTiles = "var(--second-tiles)";
+    reset();
+    randomizeColors();
+    document.querySelector("body").style.backgroundImage = "var(--second-background)";
 });
 setThreeButton.addEventListener("click", () => {
     chosenSet = setThree;
+    randomizeColors();
 });
 randomizeColors();
 

@@ -4,8 +4,9 @@
     --secondary-color: rgba(97,76,131,1);
     --text-color: white;
     --button-color: rgba(26, 168, 233, 0.6);
-    --starting-background: url(/images/backgrounds/clouds.png);
-    --first-background: url(/images/RLGMLA.png);
+    --first-tiles: url(/images/backgrounds/clouds.png);
+    --second-tiles: url(/images/backgrounds/glass.jpg);
+    --first-background: url(/images/backgrounds/RLGMLA.png);
     --second-background: url(/images/backgrounds/stars.jpg);
 }
 html {
@@ -21,7 +22,7 @@ body {
     font-family: 'Tomorrow', sans-serif;
     color: var(--text-color);
     background-color: var(--primary-color);
-    background: var(--second-background);
+    background-image: var(--first-background);
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
@@ -205,7 +206,7 @@ body {
 }
 
 .box {
-    background: var(--starting-background);
+    background-image: var(--first-tiles);
     background-position: center;
     background-size: cover;
     height: 100%; 
