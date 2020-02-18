@@ -1,15 +1,6 @@
 // VARIABLES //
 
-let images = [
-    "url(images/eagle.jpg)",
-    "url(images/flamingo.jpg)",
-    "url(images/goose.jpg)",
-    "url(images/hawk.jpg)",
-    "url(images/swallow.jpg)",
-    "url(images/sowa.jpg)",
-    "url(images/swan.jpg)",
-    "url(images/chick.jpg)"
-];
+let images = [];
 let setOne = [
     "url(images/eagle.jpg)",
     "url(images/flamingo.jpg)",
@@ -22,12 +13,12 @@ let setOne = [
     "url(images/bigowl.jpg)",
     "url(images/bweagle.jpg)",
     "url(images/greenbird.jpg)",
-    "url(images/hummingbird.jpg)",
-    "url(images/tinybird.jpg)",
-    "url(images/seagull.jpg)",
-    "url(images/blueparrot.jpg)",
-    "url(images/redparrot.jpg)",
+    "url(images/hover.jpg)",
     "url(images/toucan.jpg)",
+    "url(images/seagull.jpg)",
+    "url(images/smallbird.jpg)",
+    "url(images/redparrot.jpg)",
+    "url(images/blueparrot.jpg)",
     "url(images/crow.jpg)"
 ]
 
@@ -44,41 +35,50 @@ let chosenSet = setOne;
 
 // CREATE A GAME SET 
 
-images = [];
-
 const chooseImages = () => {
-    for (let n=0; n< gameSize / 2 + 1; n++) {
-        images.push(chosenSet[Math.floor(Math.random()*chosenSet.length)]);
+    let chosenImage;
+    images = [];
+    for (let z = 0; z < (gameSize / 2); z++) {
+        while(true) {
+            chosenImage = chosenSet[Math.floor(Math.random()*chosenSet.length)]
+            if (images.indexOf(chosenImage) == -1) {
+                images.push(chosenImage);
+                break;
+            }
+        }
     }
 }
 
 // RESET GAME BOARD, RANDOMIZE POSITION OF COLORS, OPTIONALLY SET RANDOM COLORS
 
 const randomizeColors = () => {
-    //optional -> random colors instead of images to find
-    /*colors = [];
-    for (let i=0; i<gameSize/2; i++) {
-        colors.push("rgb(" + (Math.floor(Math.random()*255)+1) + "," + (Math.floor(Math.random()*255)+1) + "," + (Math.floor(Math.random()*255)+1) + ")");
-    }*/
+    let x = 0;
     let usedOnce = [];
     let usedTwice = [];
     randomizedArray = [];
+    let image;
+    chooseImages();
     for (let i=0; i<gameSize; i++) {
         while (true) {
-            let color = images[Math.floor(Math.random()*images.length)];
-            if (usedOnce.indexOf(color) == -1) {
-                randomizedArray.push(color);
-                usedOnce.push(color);
+            image = images[Math.floor(Math.random()*images.length)];
+            if (usedOnce.indexOf(image) == -1) {
+                randomizedArray.push(image);
+                usedOnce.push(image);
                 break;
             }
-            if (usedTwice.indexOf(color) == -1) {
-                randomizedArray.push(color);
-                usedTwice.push(color);
+            if (usedTwice.indexOf(image) == -1) {
+                randomizedArray.push(image);
+                usedTwice.push(image);
                 break;
             }
+            
+            console.log(usedOnce);
+            console.log(usedTwice)
+            x++;
         }
     }
 }
+
 const reset = () => {
     //timer disappears
     document.getElementById("timer").style.display = "none";
@@ -196,8 +196,6 @@ const timer = () => {
 
 start.addEventListener("click", randomizeColors);
 start.addEventListener("click", reset);
-start.addEventListener("click", chooseImages);
-chooseImages();
 randomizeColors();
 
 
