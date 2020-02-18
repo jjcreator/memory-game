@@ -43,19 +43,6 @@ body {
     width: 22%;
 }
 
-#timer {
-    display: none;
-    font-size: 80px;
-}
-
-#main-text {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
 #tile-select, #difficulty, #music {
     display: flex;
     justify-content: space-between;
@@ -71,15 +58,27 @@ body {
     width: 107px;
 }
 
+#timer {
+    display: none;
+    font-size: 80px;
+}
+
+#main-text {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
 .buttons {
     margin-left: 15px;
     margin-right: 10px;
 }
 
-#title {
-    min-width: 50vw;
+#title h1{
+    margin-right: 86px;
 }
-
 
 .animated {
     animation: scroll 1s linear infinite alternate;
@@ -172,7 +171,6 @@ body {
     margin: 10px auto 0 auto;
     padding: 15px;
     font-size: 18px;
-
 }
 
 #start:hover {
@@ -185,12 +183,6 @@ body {
 
 #game {
     width: 100%;
-
-}
-
-#game h2 {
-    text-align: center;
-    padding: 25px;
 }
 
 #main-grid {
@@ -202,7 +194,7 @@ body {
     grid-gap: 25px;
     align-items: center;
     justify-items: center;
-    padding: 2.5vw;
+    padding: 1.4vw;
 }
 
 .box {

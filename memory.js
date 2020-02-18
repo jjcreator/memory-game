@@ -55,7 +55,7 @@ let setTwoButton = document.getElementById("second-tileset");
 let setThreeButton = document.getElementById("third-tileset");
 let chosenTiles = "var(--first-tiles)";
 
-// CREATE A GAME SET 
+// CREATE A IMAGE SET 
 
 const chooseImages = () => {
     let chosenImage;
@@ -74,12 +74,12 @@ const chooseImages = () => {
 // RESET GAME BOARD, RANDOMIZE POSITION OF COLORS, OPTIONALLY SET RANDOM COLORS
 
 const randomizeColors = () => {
-    let x = 0;
     let usedOnce = [];
     let usedTwice = [];
     randomizedArray = [];
     let image;
     chooseImages();
+    // loops infinitely until it fills the randomized array with gamesize/2 items
     for (let i=0; i<gameSize; i++) {
         while (true) {
             image = images[Math.floor(Math.random()*images.length)];
@@ -134,7 +134,6 @@ for (let k=0; k<boxes.length; k++) {
         let h1 = document.querySelector("h1");
         h1.classList.remove("animated");
         h1.textContent = "Let's go!!!";
-        h1.style.animation = "burn 1s linear alternate infinite";
         // starts timer
         document.getElementById("timer").style.display = "block";
         if (clicks == 0) {
@@ -192,8 +191,9 @@ const victoryCheck = () => {
         }
     if (victory == gameSize) {
         clearInterval(timing);
-        document.querySelector("h1").style.width = "80vw";
-        document.querySelector("h1").textContent = `Victory! You won in ${elapsed} seconds! It took you ${clicks} clicks.`;
+        document.querySelector("#title").style.width = "80vw";
+        document.querySelector("#title").style.marginRight = "0";
+        document.querySelector("#title").textContent = `Victory! You won in ${elapsed} seconds! It took you ${clicks} clicks.`;
     }
     }
 }
