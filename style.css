@@ -6,8 +6,10 @@
     --button-color: rgba(26, 168, 233, 0.6);
     --first-tiles: url(/images/backgrounds/clouds.png);
     --second-tiles: url(/images/backgrounds/glass.jpg);
-    --first-background: url(/images/backgrounds/RLGMLA.png);
+    --third-tiles: url(/images/backgrounds/leaves.jpg);
+    --first-background: url(/images/backgrounds/seaclouds.jpg);
     --second-background: url(/images/backgrounds/stars.jpg);
+    --third-background: url(./images/backgrounds/conifer.jpg);
 }
 html {
     height: 100vh;
@@ -76,8 +78,10 @@ body {
     margin-right: 10px;
 }
 
-#title h1{
+#title {
     margin-right: 86px;
+    font-size: 32px;
+    font-weight: bold;
 }
 
 .animated {

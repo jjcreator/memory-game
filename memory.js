@@ -37,8 +37,31 @@ let setTwo = [
     "url(images/setTwo/spaceship.jpg)",
     "url(images/setTwo/spaceship2.jpg)",
     "url(images/setTwo/station.jpg)",
-    "url(images/setTwo/train.jpg)"
-]
+    "url(images/setTwo/train.jpg)",
+    "url(images/setTwo/moon3.jpg)",
+    "url(images/setTwo/takeoff.jpg)"
+];
+
+let setThree = [
+    "url(images/setThree/bear.jpg)",
+    "url(images/setThree/beaver.jpg)",
+    "url(images/setThree/boar.jpg)",
+    "url(images/setThree/butterfly.jpg)",
+    "url(images/setThree/chipmunk.jpg)",
+    "url(images/setThree/deer.jpg)",
+    "url(images/setThree/dragonfly.jpg)",
+    "url(images/setThree/elk.jpg)",
+    "url(images/setThree/fox.jpg)",
+    "url(images/setThree/hedgehog.jpg)",
+    "url(images/setThree/lynx.jpg)",
+    "url(images/setThree/moose.jpg)",
+    "url(images/setThree/rabbit.jpg)",
+    "url(images/setThree/snake.jpg)",
+    "url(images/setThree/spider.jpg)",
+    "url(images/setThree/squirrel.jpg)",
+    "url(images/setThree/wolf.jpg)"
+];
+
 
 let boxes = document.getElementsByClassName("box");
 let start = document.querySelector("#start");
@@ -97,6 +120,8 @@ const randomizeColors = () => {
     }
 }
 
+// RESET GAME STATE
+
 const reset = () => {
     //timer disappears
     document.getElementById("timer").style.display = "none";
@@ -110,10 +135,9 @@ const reset = () => {
     elapsed = 0;
     time.innerText = "0";
     //main text resets and animates
-    let h1 = document.querySelector("h1");
+    let h1 = document.querySelector("#title");
     h1.style.width = "50vw";
     h1.textContent = "";
-    h1.style.animation = "scroll 1s linear infinite alternate";
     h1.classList.add("animated");
     //boxes are reset
     for (let i=0; i<boxes.length; i++) {
@@ -124,62 +148,65 @@ const reset = () => {
 
 // CLICK EVENTS FOR BOXES - REVEAL HIDDEN COLOR
 
-for (let k=0; k<boxes.length; k++) {
-    boxes[k].addEventListener("click", function() {
-        //makes options disappear
-        document.querySelector("#tile-select").style.display = "none";
-        document.querySelector("#difficulty").style.display = "none";
-        document.querySelector("#music").style.display = "none";
-        // disables text animation
-        let h1 = document.querySelector("h1");
-        h1.classList.remove("animated");
-        h1.textContent = "Let's go!!!";
-        // starts timer
-        document.getElementById("timer").style.display = "block";
-        if (clicks == 0) {
-            timing = setInterval(timer, 1000);
-        }
-        if (revealedBoxes[0] != this) {
-        clicks++;
-        let colorReset = 0;
-        let myBox = this;
-        let num = parseInt(this.id.match(/[0-9]+/g));
-        const colorize = () => {
-            for (let n=0; n<boxes.length; n++) {
-                if (!boxes[n].classList.contains("found")) {
-                boxes[n].style.backgroundImage = chosenTiles;
-                }
+const addEvents = () => {
+    for (let k=0; k<boxes.length; k++) {
+        boxes[k].addEventListener("click", function() {
+            //makes options disappear
+            document.querySelector("#tile-select").style.display = "none";
+            document.querySelector("#difficulty").style.display = "none";
+            document.querySelector("#music").style.display = "none";
+            // disables text animation
+            let h1 = document.querySelector("#title");
+            h1.classList.remove("animated");
+            h1.textContent = "Let's go!!!";
+            // starts timer
+            document.getElementById("timer").style.display = "block";
+            if (clicks == 0) {
+                timing = setInterval(timer, 1000);
             }
-        }
-        if (revealedBoxes.length < 2) {
-            myBox.style.backgroundImage = randomizedArray[num - 1];
-            revealedBoxes.push(myBox);
-        }
-        if (revealedBoxes.length == 2) {
-            if (revealedBoxes[0].style.backgroundImage != revealedBoxes[1].style.backgroundImage) {
-                revealedBoxes = [];
-                for (let a=0; a<boxes.length; a++) {
-                    boxes[a].classList.add("pointer-none")
-                }
-                setTimeout(function() {
-                    for (let b=0; b<boxes.length; b++) {
-                        boxes[b].classList.remove("pointer-none");
+            // count clicks
+            if (revealedBoxes[0] != this) {
+            clicks++;
+            let colorReset = 0;
+            let myBox = this;
+            let num = parseInt(this.id.match(/[0-9]+/g));
+            const colorize = () => {
+                for (let n=0; n<boxes.length; n++) {
+                    if (!boxes[n].classList.contains("found")) {
+                    boxes[n].style.backgroundImage = chosenTiles;
                     }
+                }
+            }
+            if (revealedBoxes.length < 2) {
+                myBox.style.backgroundImage = randomizedArray[num - 1];
+                revealedBoxes.push(myBox);
+            }
+            if (revealedBoxes.length == 2) {
+                if (revealedBoxes[0].style.backgroundImage != revealedBoxes[1].style.backgroundImage) {
+                    revealedBoxes = [];
+                    for (let a=0; a<boxes.length; a++) {
+                        boxes[a].classList.add("pointer-none")
+                    }
+                    setTimeout(function() {
+                        for (let b=0; b<boxes.length; b++) {
+                            boxes[b].classList.remove("pointer-none");
+                        }
+                        colorize();
+                    }, 450);
+                }
+                else if (revealedBoxes[0].style.backgroundImage == revealedBoxes[1].style.backgroundImage) {
+                    revealedBoxes[0].classList.add("found");
+                    revealedBoxes[1].classList.add("found");
+                    revealedBoxes = [];
                     colorize();
-                }, 450);
+                    
+                }
             }
-            else if (revealedBoxes[0].style.backgroundImage == revealedBoxes[1].style.backgroundImage) {
-                revealedBoxes[0].classList.add("found");
-                revealedBoxes[1].classList.add("found");
-                revealedBoxes = [];
-                colorize();
-                
-            }
-        }
-    victoryCheck();
-}}
-    )};
+        victoryCheck();
+    }}
+        )};
 
+};
 
 // CHECK FOR POINTS
 
@@ -193,19 +220,111 @@ const victoryCheck = () => {
         clearInterval(timing);
         document.querySelector("#title").style.width = "80vw";
         document.querySelector("#title").style.marginRight = "0";
-        document.querySelector("#title").textContent = `Victory! You won in ${elapsed} seconds! It took you ${clicks} clicks.`;
+        document.querySelector("#title").textContent = `Victory! TOTAL SCORE: ${10000 - (Math.round((elapsed + clicks * 2)/3)*100)} (${elapsed} seconds, ${clicks} clicks)`;
     }
     }
 }
 
-//
+// TIMER
 const timer = () => {
     elapsed++;
     time.textContent = elapsed.toString();
 }
 
+// CHANGE GAME SIZE 
+
+const gameDifficulty = (level) => {
+    let game = document.querySelector("#main-grid");
+    let newDiv;
+    game.innerHTML = "";
+    if (level === 1) {
+        gameSize = 16;
+        
+    }
+    if (level === 2) {
+        if (gameSize = 16) {
+            for (n=1; n<33; n++) {
+                newDiv = document.createElement("div");
+                newDiv.classList.add("box");
+                newDiv.id = "box" + n;
+                game.appendChild(newDiv);
+                newDiv.addEventListener("click", function() {
+                    //makes options disappear
+                    document.querySelector("#tile-select").style.display = "none";
+                    document.querySelector("#difficulty").style.display = "none";
+                    document.querySelector("#music").style.display = "none";
+                    // disables text animation
+                    let h1 = document.querySelector("#title");
+                    h1.classList.remove("animated");
+                    h1.textContent = "Let's go!!!";
+                    // starts timer
+                    document.getElementById("timer").style.display = "block";
+                    if (clicks == 0) {
+                        timing = setInterval(timer, 1000);
+                    }
+                    // count clicks
+                    if (revealedBoxes[0] != this) {
+                    clicks++;
+                    let colorReset = 0;
+                    let myBox = this;
+                    let num = parseInt(this.id.match(/[0-9]+/g));
+                    const colorize = () => {
+                        for (let n=0; n<boxes.length; n++) {
+                            if (!boxes[n].classList.contains("found")) {
+                            boxes[n].style.backgroundImage = chosenTiles;
+                            }
+                        }
+                    }
+                    if (revealedBoxes.length < 2) {
+                        myBox.style.backgroundImage = randomizedArray[num - 1];
+                        revealedBoxes.push(myBox);
+                    }
+                    if (revealedBoxes.length == 2) {
+                        if (revealedBoxes[0].style.backgroundImage != revealedBoxes[1].style.backgroundImage) {
+                            revealedBoxes = [];
+                            for (let a=0; a<boxes.length; a++) {
+                                boxes[a].classList.add("pointer-none")
+                            }
+                            setTimeout(function() {
+                                for (let b=0; b<boxes.length; b++) {
+                                    boxes[b].classList.remove("pointer-none");
+                                }
+                                colorize();
+                            }, 450);
+                        }
+                        else if (revealedBoxes[0].style.backgroundImage == revealedBoxes[1].style.backgroundImage) {
+                            revealedBoxes[0].classList.add("found");
+                            revealedBoxes[1].classList.add("found");
+                            revealedBoxes = [];
+                            colorize();
+                            
+                        }
+                    }
+                victoryCheck();
+            }
+            });
+            }
+        }
+        gameSize = 32;
+        game.style.gridTemplateColumns = "repeat(8, 9vw)";
+        reset();
+        
+    }
+}
+
+// REMOVE EVENTS 
+
+/*const removeEvents = (givenArray) => {
+    for (let a=0; a<givenArray.length; a++) {
+        givenArray[a].
+    }
+
+}*/
+
 // INITIALIZE GAME
 
+addEvents();
+randomizeColors();
 start.addEventListener("click", randomizeColors);
 start.addEventListener("click", reset);
 setOneButton.addEventListener("click", () => {
@@ -224,9 +343,12 @@ setTwoButton.addEventListener("click", () => {
 });
 setThreeButton.addEventListener("click", () => {
     chosenSet = setThree;
+    chosenTiles = "var(--third-tiles)";
+    reset();
     randomizeColors();
+    document.querySelector("body").style.backgroundImage = "var(--third-background)";
 });
-randomizeColors();
+
 
 
 
