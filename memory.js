@@ -23,7 +23,6 @@ let setOne = [
     "url(images/setOne/blackswan.jpg)",
     "url(images/setOne/tinybird.jpg)",
     "url(images/setOne/duck.jpg)"
-
 ]
 
 let setTwo = [
@@ -49,10 +48,6 @@ let setTwo = [
     "url(images/setTwo/desert.jpg)",
     "url(images/setTwo/ufo.jpg)",
     "url(images/setTwo/mysterious.jpg)"
-
-
-
-
 ];
 
 let setThree = [
@@ -76,7 +71,6 @@ let setThree = [
     "url(images/setThree/frog.jpg)",
     "url(images/setThree/ladybug.jpg)",
     "url(images/setThree/furry.jpg)"
-
 ];
 
 
@@ -143,6 +137,8 @@ const randomizeColors = () => {
 // RESET GAME STATE
 
 const reset = () => {
+    //reset button disappears
+    start.style.display = "none";
     //timer disappears
     document.getElementById("timer").style.display = "none";
     //options appear
@@ -171,6 +167,8 @@ const reset = () => {
 const addEvents = () => {
     for (let k=0; k<boxes.length; k++) {
         boxes[k].addEventListener("click", function() {
+            //reset button appears
+            start.style.display = "block";
             // makes options disappear
             document.querySelector("#tile-select").style.display = "none";
             document.querySelector("#difficulty").style.display = "none";

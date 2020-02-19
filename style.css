@@ -35,7 +35,7 @@ body {
 /* ----------Header menu---------- */
 
 #main-header {
-    height: 175px;
+    height: 100px;
     background-color: var(--button-color);
     text-align: center;
     display: flex;
@@ -45,6 +45,7 @@ body {
 
 #left-panel {
     width: 22%;
+    padding: 10px;
 }
 
 .button-row {
@@ -162,6 +163,7 @@ body {
     margin: 10px auto 0 auto;
     padding: 15px;
     font-size: 18px;
+    display: none;
 }
 
 #start:hover {
@@ -204,7 +206,7 @@ body {
     justify-self: center;
     position: relative;
     cursor: pointer;
-    transition: transform 0.5s ease-in;
+    transition: transform 0.7s ease-in;
     
 }
 
@@ -228,11 +230,29 @@ body {
 }
 
 .found {
-    border: 3px rgb(5, 204, 5) solid;
-    border-radius: 10%;
+    border: 2px rgb(5, 204, 5) solid;
     pointer-events: none;
     box-shadow: none;
-    transform: scale(1.1);
+    transform: scale(0);
+    animation: poof 2s ease-out forwards;
+}
+
+@keyframes poof {
+    0% {
+        opacity: 1;
+    }
+    25% {
+        opacity: 0.75
+    }
+    50% {
+        opacity: 0.5
+    }
+    75% {
+        opacity: 0.25
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 .foundz::before {
@@ -252,19 +272,17 @@ body {
 }
 
 @media only screen and (max-width: 750px) {
-    
     #main-header {
         justify-content: space-between;
         flex-direction: column;
-        max-height: 25vh;
+        min-height: 10vh;
+
     }
-
-
-    #left-panel {
+    #left-panel, #right-panel {
         width: 100%;
     }
-
-    #left-panel p {
+   
+    #left-panel p, #right-panel p {
         display: none;
     }
 
@@ -289,10 +307,15 @@ body {
     }
 
     #title {
-        font-size: 20px;
+        font-size: 16px;
         margin: 0;
         padding: 0;
         min-width: 100%;
+        max-height: 2vh;
+    }
+
+    #timer {
+        font-size: 30px;
     }
 
     .game-button {
