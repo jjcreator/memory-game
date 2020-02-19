@@ -151,7 +151,7 @@ const reset = () => {
 const addEvents = () => {
     for (let k=0; k<boxes.length; k++) {
         boxes[k].addEventListener("click", function() {
-            //makes options disappear
+            // makes options disappear
             document.querySelector("#tile-select").style.display = "none";
             document.querySelector("#difficulty").style.display = "none";
             document.querySelector("#music").style.display = "none";
@@ -233,83 +233,22 @@ const timer = () => {
 
 // CHANGE GAME SIZE 
 
-const gameDifficulty = (level) => {
+const gameDifficulty = (boardSize) => {
     let game = document.querySelector("#main-grid");
     let newDiv;
     game.innerHTML = "";
-    if (level === 1) {
-        gameSize = 16;
-        
-    }
-    if (level === 2) {
-        if (gameSize = 16) {
-            for (n=1; n<33; n++) {
-                newDiv = document.createElement("div");
-                newDiv.classList.add("box");
-                newDiv.id = "box" + n;
-                game.appendChild(newDiv);
-                newDiv.addEventListener("click", function() {
-                    //makes options disappear
-                    document.querySelector("#tile-select").style.display = "none";
-                    document.querySelector("#difficulty").style.display = "none";
-                    document.querySelector("#music").style.display = "none";
-                    // disables text animation
-                    let h1 = document.querySelector("#title");
-                    h1.classList.remove("animated");
-                    h1.textContent = "Let's go!!!";
-                    // starts timer
-                    document.getElementById("timer").style.display = "block";
-                    if (clicks == 0) {
-                        timing = setInterval(timer, 1000);
-                    }
-                    // count clicks
-                    if (revealedBoxes[0] != this) {
-                    clicks++;
-                    let colorReset = 0;
-                    let myBox = this;
-                    let num = parseInt(this.id.match(/[0-9]+/g));
-                    const colorize = () => {
-                        for (let n=0; n<boxes.length; n++) {
-                            if (!boxes[n].classList.contains("found")) {
-                            boxes[n].style.backgroundImage = chosenTiles;
-                            }
-                        }
-                    }
-                    if (revealedBoxes.length < 2) {
-                        myBox.style.backgroundImage = randomizedArray[num - 1];
-                        revealedBoxes.push(myBox);
-                    }
-                    if (revealedBoxes.length == 2) {
-                        if (revealedBoxes[0].style.backgroundImage != revealedBoxes[1].style.backgroundImage) {
-                            revealedBoxes = [];
-                            for (let a=0; a<boxes.length; a++) {
-                                boxes[a].classList.add("pointer-none")
-                            }
-                            setTimeout(function() {
-                                for (let b=0; b<boxes.length; b++) {
-                                    boxes[b].classList.remove("pointer-none");
-                                }
-                                colorize();
-                            }, 450);
-                        }
-                        else if (revealedBoxes[0].style.backgroundImage == revealedBoxes[1].style.backgroundImage) {
-                            revealedBoxes[0].classList.add("found");
-                            revealedBoxes[1].classList.add("found");
-                            revealedBoxes = [];
-                            colorize();
-                            
-                        }
-                    }
-                victoryCheck();
-            }
-            });
-            }
+    gameSize = boardSize;
+    for (n=1; n<boardSize+1; n++) {
+        newDiv = document.createElement("div");
+        newDiv.classList.add("box");
+        newDiv.id = "box" + n;
+        game.appendChild(newDiv);
         }
-        gameSize = 32;
-        game.style.gridTemplateColumns = "repeat(8, 9vw)";
-        reset();
-        
-    }
+    boxes = document.getElementsByClassName("box");
+    addEvents();
+    randomizeColors();
+    game.style.gridTemplateColumns = "repeat(" + boardSize / 4 + ", 9vw)";
+    reset();
 }
 
 // REMOVE EVENTS 
