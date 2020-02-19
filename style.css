@@ -35,7 +35,7 @@ body {
 /* ----------Header menu---------- */
 
 #main-header {
-    height: 100px;
+    height: 10vh;
     background-color: var(--button-color);
     text-align: center;
     display: flex;
@@ -176,22 +176,21 @@ body {
 
 #game {
     width: 100%;
+    display: flex;
     align-items: center;
     justify-content: center;
-    display: flex;
-    min-height: 80vh;
+    height: 90vh;
+    border: 2px solid black;
 }
 
 #main-grid {
     display: grid;
     max-width: fit-content;
     margin: 0 auto;
-    height: 100%;
     grid-gap: 25px;
     align-items: center;
     justify-items: center;
-    padding: 1.4vw;
-    border: 1px solid yellow;
+    padding: 1vw;
 }
 
 .box {
@@ -280,6 +279,7 @@ body {
     }
     #left-panel, #right-panel {
         width: 100%;
+        padding: 0;
     }
    
     #left-panel p, #right-panel p {
@@ -303,7 +303,7 @@ body {
     }
 
     #main-text {
-        max-height: 5vh;
+        min-height: 3vh;
     }
 
     #title {
