@@ -19,7 +19,11 @@ let setOne = [
     "url(images/setOne/smallbird.jpg)",
     "url(images/setOne/redparrot.jpg)",
     "url(images/setOne/blueparrot.jpg)",
-    "url(images/setOne/crow.jpg)"
+    "url(images/setOne/crow.jpg)",
+    "url(images/setOne/blackswan.jpg)",
+    "url(images/setOne/tinybird.jpg)",
+    "url(images/setOne/duck.jpg)"
+
 ]
 
 let setTwo = [
@@ -39,7 +43,16 @@ let setTwo = [
     "url(images/setTwo/station.jpg)",
     "url(images/setTwo/train.jpg)",
     "url(images/setTwo/moon3.jpg)",
-    "url(images/setTwo/takeoff.jpg)"
+    "url(images/setTwo/takeoff.jpg)",
+    "url(images/setTwo/system.jpg)",
+    "url(images/setTwo/iss.jpg)",
+    "url(images/setTwo/desert.jpg)",
+    "url(images/setTwo/ufo.jpg)",
+    "url(images/setTwo/mysterious.jpg)"
+
+
+
+
 ];
 
 let setThree = [
@@ -59,7 +72,11 @@ let setThree = [
     "url(images/setThree/snake.jpg)",
     "url(images/setThree/spider.jpg)",
     "url(images/setThree/squirrel.jpg)",
-    "url(images/setThree/wolf.jpg)"
+    "url(images/setThree/wolf.jpg)",
+    "url(images/setThree/frog.jpg)",
+    "url(images/setThree/ladybug.jpg)",
+    "url(images/setThree/furry.jpg)"
+
 ];
 
 
@@ -77,6 +94,9 @@ let setOneButton = document.getElementById("first-tileset");
 let setTwoButton = document.getElementById("second-tileset");
 let setThreeButton = document.getElementById("third-tileset");
 let chosenTiles = "var(--first-tiles)";
+let easyModeButton = document.querySelector("#easy-mode");
+let mediumModeButton = document.querySelector("#medium-mode");
+let hardModeButton = document.querySelector("#hard-mode");
 
 // CREATE A IMAGE SET 
 
@@ -220,7 +240,7 @@ const victoryCheck = () => {
         clearInterval(timing);
         document.querySelector("#title").style.width = "80vw";
         document.querySelector("#title").style.marginRight = "0";
-        document.querySelector("#title").textContent = `Victory! TOTAL SCORE: ${10000 - (Math.round((elapsed + clicks * 2)/3)*100)} (${elapsed} seconds, ${clicks} clicks)`;
+        document.querySelector("#title").textContent = `Victory! TOTAL SCORE: ${gameSize * 625 - (Math.round((elapsed + clicks * 2)/3)*100)} (${elapsed} seconds, ${clicks} clicks)`;
     }
     }
 }
@@ -286,6 +306,16 @@ setThreeButton.addEventListener("click", () => {
     reset();
     randomizeColors();
     document.querySelector("body").style.backgroundImage = "var(--third-background)";
+});
+easyModeButton.addEventListener("click", () => {
+    gameDifficulty(16);
+});
+mediumModeButton.addEventListener("click", () => {
+    gameDifficulty(28);
+
+});
+hardModeButton.addEventListener("click", ()=> {
+    gameDifficulty(36);
 });
 
 
