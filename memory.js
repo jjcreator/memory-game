@@ -265,9 +265,23 @@ const gameDifficulty = (boardSize) => {
         game.appendChild(newDiv);
         }
     boxes = document.getElementsByClassName("box");
+    if (gameSize == 16) {
+        game.classList.remove("seven-columns");
+        game.classList.remove("nine-columns");
+        game.classList.add("four-columns");
+    }
+    if (gameSize == 28) {
+        game.classList.add("seven-columns");
+        game.classList.remove("nine-columns");
+        game.classList.remove("four-columns");
+    }
+    if (gameSize == 36) {
+        game.classList.remove("seven-columns");
+        game.classList.add("nine-columns");
+        game.classList.remove("four-columns");
+    }
     addEvents();
     randomizeColors();
-    game.style.gridTemplateColumns = "repeat(" + boardSize / 4 + ", 9vw)";
     reset();
 }
 
