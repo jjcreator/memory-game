@@ -180,7 +180,6 @@ body {
     align-items: center;
     justify-content: center;
     height: 90vh;
-    border: 2px solid black;
 }
 
 #main-grid {
@@ -218,8 +217,8 @@ body {
     grid-template-rows: repeat(4, 9vw);
 }
 
-.seven-columns {
-    grid-template-columns: repeat(7, 9vw);
+.six-columns {
+    grid-template-columns: repeat(6, 9vw);
     grid-template-rows: repeat(4, 9vw);
 }
 
@@ -274,7 +273,7 @@ body {
     #main-header {
         justify-content: space-between;
         flex-direction: column;
-        min-height: 10vh;
+        max-height: 10vh;
 
     }
     #left-panel, #right-panel {
@@ -337,8 +336,8 @@ body {
     }
 
     #main-grid {
-        grid-template-columns: repeat(4, 15vw);
-        grid-template-rows: repeat(auto-fill, 15vw);
+        grid-template-columns: repeat(6, 14vw);
+        grid-template-rows: repeat(auto-fill, 14vw);
         grid-gap: 5px;
         justify-items: center;
         align-items: center;
@@ -346,8 +345,8 @@ body {
     }
 
     .box {
-        width: 15vw;
-        height: 15vw;
+        width: 14vw;
+        height: 14vw;
     }
     .box:hover {
         border: 2px solid red;

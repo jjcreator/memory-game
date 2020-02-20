@@ -264,17 +264,17 @@ const gameDifficulty = (boardSize) => {
         }
     boxes = document.getElementsByClassName("box");
     if (gameSize == 16) {
-        game.classList.remove("seven-columns");
+        game.classList.remove("six-columns");
         game.classList.remove("nine-columns");
         game.classList.add("four-columns");
     }
-    if (gameSize == 28) {
-        game.classList.add("seven-columns");
+    if (gameSize == 24) {
+        game.classList.add("six-columns");
         game.classList.remove("nine-columns");
         game.classList.remove("four-columns");
     }
     if (gameSize == 36) {
-        game.classList.remove("seven-columns");
+        game.classList.remove("six-columns");
         game.classList.add("nine-columns");
         game.classList.remove("four-columns");
     }
@@ -323,7 +323,7 @@ easyModeButton.addEventListener("click", () => {
     gameDifficulty(16);
 });
 mediumModeButton.addEventListener("click", () => {
-    gameDifficulty(28);
+    gameDifficulty(24);
 
 });
 hardModeButton.addEventListener("click", ()=> {
