@@ -41,11 +41,17 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    width: 100%;
 }
 
 #left-panel {
-    width: 22%;
+    width: 25%;
     padding: 10px;
+}
+
+#mobile-icon {
+    display: none;
+    cursor: pointer;
 }
 
 .button-row {
@@ -269,24 +275,39 @@ body {
     pointer-events: none;
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 950px) {
     #main-header {
-        justify-content: space-between;
+        justify-content: flex-start;
         flex-direction: column;
-        max-height: 10vh;
+        height: 12vh;
 
     }
     #left-panel, #right-panel {
         width: 100%;
         padding: 0;
     }
+
+    #left-panel {
+        
+    }
    
     #left-panel p, #right-panel p {
         display: none;
     }
 
+    #mobile-icon {
+        display: none;
+        width: 5vh;
+        height: auto;
+    }
+
     #left-panel button, #right-panel button {
         font-size: 10px;
+        
+    }
+
+    #right-panel {
+        
     }
 
     .controls {
@@ -355,9 +376,21 @@ body {
 
 }
 
-@media only screen and (min-width: 751px) and (max-width: 1480px) {
-    #left-panel p {
+@media only screen and (min-width: 950px) and (max-width: 1480px) {
+    #left-panel p, #right-panel p {
         display: none;
+    }
+
+    #left-panel {
+        width: 28%
+    }
+    
+    #left-panel button, #right-panel button {
+        font-size: 11px;
+    }
+    #title {
+        font-size: 22px;
+        margin-right: 22px;
     }
 
     #main-grid {
@@ -365,3 +398,4 @@ body {
     }
 
 }
+
