@@ -137,6 +137,12 @@ const randomizeColors = () => {
 // RESET GAME STATE
 
 const reset = () => {
+    revealedBoxes = [];
+    //time and clicks reset
+    clicks = 0;
+    clearInterval(timing);
+    elapsed = 0;
+    time.innerText = "0";
     //reset button disappears
     start.style.display = "none";
     //timer disappears
@@ -145,11 +151,6 @@ const reset = () => {
     document.querySelector("#tile-select").style.display = "flex";
     document.querySelector("#difficulty").style.display = "flex";
     document.querySelector("#music").style.display = "flex";
-    //time and clicks reset
-    clicks = 0;
-    clearInterval(timing);
-    elapsed = 0;
-    time.innerText = "0";
     //main text resets and animates
     let h1 = document.querySelector("#title");
     h1.style.width = "50vw";
@@ -167,6 +168,10 @@ const reset = () => {
 const addEvents = () => {
     for (let k=0; k<boxes.length; k++) {
         boxes[k].addEventListener("click", function() {
+            //variable declarations
+            let myBox = this;
+            let num = parseInt(this.id.match(/[0-9]+/g));
+            let h1 = document.querySelector("#title");
             //reset button appears
             start.style.display = "flex";
             // makes options disappear
@@ -174,7 +179,6 @@ const addEvents = () => {
             document.querySelector("#difficulty").style.display = "none";
             document.querySelector("#music").style.display = "none";
             // disables text animation
-            let h1 = document.querySelector("#title");
             h1.classList.remove("animated");
             h1.textContent = "Let's go!!!";
             // starts timer
@@ -182,12 +186,7 @@ const addEvents = () => {
             if (clicks == 0) {
                 timing = setInterval(timer, 1000);
             }
-            // count clicks
-            if (revealedBoxes[0] != this) {
-            clicks++;
-            let colorReset = 0;
-            let myBox = this;
-            let num = parseInt(this.id.match(/[0-9]+/g));
+            // sets backgrounds back to tile back
             const colorize = () => {
                 for (let n=0; n<boxes.length; n++) {
                     if (!boxes[n].classList.contains("found")) {
@@ -195,33 +194,35 @@ const addEvents = () => {
                     }
                 }
             }
-            if (revealedBoxes.length < 2) {
-                myBox.style.backgroundImage = randomizedArray[num - 1];
-                revealedBoxes.push(myBox);
-            }
-            if (revealedBoxes.length == 2) {
-                if (revealedBoxes[0].style.backgroundImage != revealedBoxes[1].style.backgroundImage) {
-                    revealedBoxes = [];
-                    for (let a=0; a<boxes.length; a++) {
-                        boxes[a].classList.add("pointer-none")
-                    }
-                    setTimeout(function() {
-                        for (let b=0; b<boxes.length; b++) {
-                            boxes[b].classList.remove("pointer-none");
-                        }
-                        colorize();
-                    }, 450);
+            if (revealedBoxes[0] != this) {
+                clicks++;
+                if (revealedBoxes.length < 2) {
+                    myBox.style.backgroundImage = randomizedArray[num - 1];
+                    revealedBoxes.push(myBox);
                 }
-                else if (revealedBoxes[0].style.backgroundImage == revealedBoxes[1].style.backgroundImage) {
-                    revealedBoxes[0].classList.add("found");
-                    revealedBoxes[1].classList.add("found");
-                    revealedBoxes = [];
-                    colorize();
-                    
+                if (revealedBoxes.length == 2) {
+                    if (revealedBoxes[0].style.backgroundImage != revealedBoxes[1].style.backgroundImage) {
+                        revealedBoxes = [];
+                        for (let a=0; a<boxes.length; a++) {
+                            boxes[a].classList.add("pointer-none")
+                        }
+                        setTimeout(function() {
+                            for (let b=0; b<boxes.length; b++) {
+                                boxes[b].classList.remove("pointer-none");
+                            }
+                            colorize();
+                        }, 550);
+                    }
+                    else if (revealedBoxes[0].style.backgroundImage == revealedBoxes[1].style.backgroundImage) {
+                        revealedBoxes[0].classList.add("found");
+                        revealedBoxes[1].classList.add("found");
+                        revealedBoxes = [];
+                        colorize();
+                    }
                 }
             }
         victoryCheck();
-    }}
+    }
         )};
 
 };
