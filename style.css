@@ -83,8 +83,9 @@ body {
 }
 
 .buttons {
-    margin-left: 15px;
-    margin-right: 10px;
+    display: flex;
+    margin: 0 auto;
+    min-width: 100%;
 }
 
 #title {
@@ -155,8 +156,8 @@ body {
 .small {
     border: 3px outset rgb(64, 50, 87);
     padding: 5px;
-    margin: 2px 0;
-    width: 70px;
+    margin: 2px 4px;
+    width: 33%;
 }
 
 .small:active {
@@ -381,6 +382,11 @@ body {
         
     }
 
+    .button-row {
+        width: 50%;
+        border: 1px solid yellow;
+    }
+
     .controls {
         flex-direction: row;
     }
@@ -391,6 +397,11 @@ body {
         min-width: 100%;
         margin: 0 auto;
         padding: 5px;
+        border: 3px solid blue;
+    }
+
+    .small {
+        
     }
 
     #main-text {
@@ -439,7 +450,6 @@ body {
     .box {
         width: 14vw;
         height: 14vw;
-        border: 2x white solid;
     }
     .box:hover {
         
