@@ -65,6 +65,7 @@ body {
 }
 
 .game-button {
+    border: 2px solid transparent;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,6 +76,22 @@ body {
     margin: 0 4px;
     flex: 1;
     transition: background 0.2s ease;
+}
+
+.clickable:hover {
+    font-weight: bolder;
+}
+
+@keyframes pulse {
+    0% {
+        font-weight: normal;
+    }
+    50% {
+        font-weight: bold;
+    }
+    100% {
+        font-weight: bolder;
+    }
 }
 
 .label {
