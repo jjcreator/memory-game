@@ -46,7 +46,7 @@ body {
 
 #left-panel {
     width: 25%;
-    padding: 10px;
+    padding: 2px;
 }
 
 #mobile-icon {
@@ -56,8 +56,9 @@ body {
 
 .button-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
 .button-row p {
@@ -83,6 +84,8 @@ body {
 }
 
 .buttons {
+    display: flex;
+    flex: 1;
     margin-left: 15px;
     margin-right: 10px;
 }
@@ -150,13 +153,14 @@ body {
     cursor: pointer;
     font-family: 'Tomorrow', sans-serif;
     color: white;
+    border: 1px solid white;
 }
 
 .small {
-    border: 3px outset rgb(64, 50, 87);
     padding: 5px;
     margin: 2px 0;
-    width: 70px;
+    height: 100%;
+    flex: 1;
 }
 
 .small:active {

@@ -283,15 +283,6 @@ const gameDifficulty = (boardSize) => {
     reset();
 }
 
-// REMOVE EVENTS 
-
-/*const removeEvents = (givenArray) => {
-    for (let a=0; a<givenArray.length; a++) {
-        givenArray[a].
-    }
-
-}*/
-
 // INITIALIZE GAME
 
 addEvents();
