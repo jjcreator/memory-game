@@ -156,17 +156,15 @@ body {
     background-color: rgba(108, 81, 133, 0.4);
     display: flex;
     flex-direction: column;
-    min-width: 20%;
     justify-content: space-around;
 }
 
 #start {
-    border: 5px outset rgb(64, 50, 87);
-    margin: 10px auto 0 auto;
-    padding: 15px;
+    justify-content: center;
+    align-items: center;
     font-size: 18px;
     display: none;
-}
+    }
 
 #start:hover {
     box-shadow: 0px 0px 2px black;
@@ -235,7 +233,6 @@ body {
     box-shadow: none;
     transform: scale(0);
     animation: poof 2s ease-out forwards;
-    
 }
 
 @keyframes poof {
@@ -350,9 +347,7 @@ body {
 
 }
 
-@media only screen and (max-width: 950px) and (min-height: 401px) {
-    
-   
+@media only screen and (max-width: 900px) and (min-height: 401px) {
     #left-panel p, #right-panel p {
         display: none;
     }
@@ -418,7 +413,7 @@ body {
     }
 }
 
-@media only screen and (min-width: 950px) and (max-width: 1480px) {
+@media only screen and (min-width: 901px) and (max-width: 1480px) {
     #left-panel p, #right-panel p {
         display: none;
     }

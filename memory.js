@@ -168,7 +168,7 @@ const addEvents = () => {
     for (let k=0; k<boxes.length; k++) {
         boxes[k].addEventListener("click", function() {
             //reset button appears
-            start.style.display = "block";
+            start.style.display = "flex";
             // makes options disappear
             document.querySelector("#tile-select").style.display = "none";
             document.querySelector("#difficulty").style.display = "none";
@@ -336,7 +336,7 @@ hardModeButton.addEventListener("click", ()=> {
     gameDifficulty(36);
     easyModeButton.style.backgroundColor = "transparent";
     mediumModeButton.style.backgroundColor = "transparent";
-    hardModeButton.style.backgroundColor = "rgba(97,76,131,0.8)";
+    hardModeButton.style.backgroundColor = "rgba(97,76,131,0.7)";
 });
 
 
