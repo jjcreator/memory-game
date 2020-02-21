@@ -10,21 +10,18 @@
 <body>
     <header id="main-header">
         <div class="controls" id="left-panel">  
+            <div id="timer"><span id="time">0</span> </div>
             <div id="tile-select" class="button-row">
-                <p>TILESET:</p>
-                <div class="buttons">
-                    <button class="game-button small" id="first-tileset" type="button">SET 1</button>
-                    <button class="game-button small" id="second-tileset" type="button">SET 2</button>
-                    <button class="game-button small" id="third-tileset" type="button">SET 3</button>
-                </div>
+                <p class="game-button label">TILESET:</p>
+                <div class="game-button" id="first-tileset">SET 1</div>
+                <div class="game-button" id="second-tileset">SET 2</div>
+                <div class="game-button" id="third-tileset">SET 3</div>
             </div>
             <div id="difficulty" class="button-row">
-                <p>DIFFICULTY:</p>
-                <div class="buttons">
-                    <button class="game-button small" id="easy-mode" type="button">EASY</button>
-                    <button class="game-button small" id="medium-mode" type="button">MEDIUM</button>
-                    <button class="game-button small" id="hard-mode" type="button">HARD</button>
-                </div>
+                <p class="game-button label ">DIFFICULTY:</p>
+                <div class="game-button" id="easy-mode">EASY</div>
+                <div class="game-button" id="medium-mode">MEDIUM</div>
+                <div class="game-button" id="hard-mode">HARD</div>
             </div>
         </div>
         <div id="main-text">
@@ -32,13 +29,11 @@
         </div>
         <div class="controls" id="right-panel">
             <div id="music" class="button-row">
-                <p>AUDIO:</p>
-                <div class="buttons">
-                    <button class="game-button small" id="music-toggle" type="button">MUSIC</button>
-                    <button class="game-button small" id="sound-toggle" type="button">SOUND</button>
-                </div>
+                <p class="game-button label">AUDIO:</p>
+                <div class="game-button" id="music-toggle">MUSIC</div>
+                <div class="game-button" id="sound-toggle">SOUND</div>
             </div>
-            <button type="button" id="start" class="game-button">RESET GAME</button>
+            <div id="start" class="game-button">RESET GAME</div>
         </div>
     </header>
     <section id="game">

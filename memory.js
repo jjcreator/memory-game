@@ -295,6 +295,9 @@ setOneButton.addEventListener("click", () => {
     reset();
     randomizeColors();
     document.querySelector("body").style.backgroundImage = "var(--first-background)";
+    setOneButton.style.backgroundColor = "rgba(97,76,131,0.6)";
+    setTwoButton.style.backgroundColor = "transparent";
+    setThreeButton.style.backgroundColor = "transparent";
 });
 setTwoButton.addEventListener("click", () => {
     chosenSet = setTwo;
@@ -302,6 +305,9 @@ setTwoButton.addEventListener("click", () => {
     reset();
     randomizeColors();
     document.querySelector("body").style.backgroundImage = "var(--second-background)";
+    setOneButton.style.backgroundColor = "transparent";
+    setTwoButton.style.backgroundColor = "rgba(97,76,131,0.6)";
+    setThreeButton.style.backgroundColor = "transparent"
 });
 setThreeButton.addEventListener("click", () => {
     chosenSet = setThree;
@@ -309,16 +315,28 @@ setThreeButton.addEventListener("click", () => {
     reset();
     randomizeColors();
     document.querySelector("body").style.backgroundImage = "var(--third-background)";
+    setThreeButton.style.backgroundColor = "rgba(97,76,131,0.8)";
+    setOneButton.style.backgroundColor = "transparent";
+    setTwoButton.style.backgroundColor = "transparent";
 });
 easyModeButton.addEventListener("click", () => {
     gameDifficulty(16);
+    easyModeButton.style.backgroundColor = "rgba(97,76,131,0.8)";
+    mediumModeButton.style.backgroundColor = "transparent";
+    hardModeButton.style.backgroundColor = "transparent";
 });
 mediumModeButton.addEventListener("click", () => {
     gameDifficulty(24);
+    easyModeButton.style.backgroundColor = "transparent";
+    mediumModeButton.style.backgroundColor = "rgba(97,76,131,0.8)";
+    hardModeButton.style.backgroundColor = "transparent";
 
 });
 hardModeButton.addEventListener("click", ()=> {
     gameDifficulty(36);
+    easyModeButton.style.backgroundColor = "transparent";
+    mediumModeButton.style.backgroundColor = "transparent";
+    hardModeButton.style.backgroundColor = "rgba(97,76,131,0.8)";
 });
 
 

@@ -3,7 +3,7 @@
     --primary-color: rgba(0, 34, 112, 0.4);
     --secondary-color: rgba(97,76,131,1);
     --text-color: white;
-    --button-color: rgba(26, 168, 233, 0.6);
+    --button-color: rgba(26, 168, 233, 0.75);
     --first-tiles: url(/images/backgrounds/clouds.png);
     --second-tiles: url(/images/backgrounds/glass.jpg);
     --third-tiles: url(/images/backgrounds/leaves.jpg);
@@ -45,14 +45,13 @@ body {
 }
 
 #left-panel {
-    width: 25%;
-    padding: 2px;
+    width: 30%;
 }
 
-#mobile-icon {
-    display: none;
-    cursor: pointer;
+#right-panel {
+    width: 30%;
 }
+
 
 .button-row {
     display: flex;
@@ -62,12 +61,32 @@ body {
 }
 
 .button-row p {
-    flex: 1;
-    margin-left: 10px;
+    text-align: center
 }
 
-#music-toggle, #sound-toggle {
-    width: 107px;
+.game-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'Tomorrow', sans-serif;
+    color: white;
+    height: 80%;
+    margin: 0 4px;
+    flex: 1;
+    transition: background 0.2s ease;
+}
+
+.label {
+    cursor: default;
+    padding: 0 5px;
+    background-color: var(--button-color);
+    height: 100%;
+    margin: 0;
+}
+
+#first-tileset, #easy-mode, #music-toggle, #sound-toggle {
+    background-color: rgba(97,76,131,0.8);
 }
 
 #timer {
@@ -76,18 +95,11 @@ body {
 }
 
 #main-text {
-    flex: 1;
+    width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-}
-
-.buttons {
-    display: flex;
-    flex: 1;
-    margin-left: 15px;
-    margin-right: 10px;
 }
 
 #title {
@@ -147,26 +159,6 @@ body {
     min-width: 20%;
     justify-content: space-around;
 }
-
-.game-button {
-    background: var(--secondary-color);
-    cursor: pointer;
-    font-family: 'Tomorrow', sans-serif;
-    color: white;
-    border: 1px solid white;
-}
-
-.small {
-    padding: 5px;
-    margin: 2px 0;
-    height: 100%;
-    flex: 1;
-}
-
-.small:active {
-    border: 3px inset rgb(64, 50, 87);
-}
-
 
 #start {
     border: 5px outset rgb(64, 50, 87);
@@ -359,68 +351,48 @@ body {
 }
 
 @media only screen and (max-width: 950px) and (min-height: 401px) {
-    #main-header {
-        justify-content: flex-start;
-        flex-direction: column;
-        height: 12vh;
-
-    }
-    #left-panel, #right-panel {
-        width: 100%;
-        padding: 0;
-    }
+    
    
     #left-panel p, #right-panel p {
         display: none;
     }
 
-    #mobile-icon {
-        display: none;
-        width: 5vh;
-        height: auto;
-    }
-
-    #left-panel button, #right-panel button {
-        font-size: 10px;
-        
-    }
-
-    .controls {
-        flex-direction: row;
-    }
-
-    .buttons {
-        flex-direction: row;
-        justify-content: center;
-        min-width: 100%;
-        margin: 0 auto;
-        padding: 5px;
+    #left-panel {
+        width: 40%;
     }
 
     #main-text {
-        min-height: 3vh;
+        width: 40%;
     }
 
+    #right-panel {
+        width: 20%;
+    }
+
+    #music {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #music-toggle, #sound-toggle {
+        margin: 4px 4px;
+        height: 90%;
+        padding: 0;
+        width: 90%;
+    }
+    
     #title {
         font-size: 16px;
         margin: 0;
         padding: 0;
-        min-width: 100%;
-        max-height: 2vh;
+        max-width: 50%;
     }
 
     #timer {
         font-size: 30px;
     }
 
-    .game-button {
-        border: 2px solid black;
-    }
-
-    .game-button:active {
-        border: 2px solid black;
-    }
-    
     #start {
         margin: 10px;
         padding: 6px;
@@ -443,13 +415,7 @@ body {
     .box {
         width: 14vw;
         height: 14vw;
-        border: 2x white solid;
     }
-    .box:hover {
-        
-    }
-
-
 }
 
 @media only screen and (min-width: 950px) and (max-width: 1480px) {
