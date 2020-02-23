@@ -99,6 +99,7 @@ let foundSound = new Audio("./sounds/325805__wagna__collect.wav");
 let victorySound = new Audio("./sounds/258142__tuudurt__level-win.wav");
 let musicMuted = false;
 let soundMuted = false;
+let confirmButton = document.querySelector("#confirm-button");
 
 
 // CREATE A IMAGE SET 
@@ -425,7 +426,13 @@ soundButton.addEventListener("click", () => {
     }
     click();
 
-})
+});
+
+confirmButton.addEventListener("click", ()=> {
+    document.querySelector("#start-overlay").style.backgroundColor = "transparent";
+    document.querySelector("#start-overlay").style.transform = "scale(0)";
+    setTimeout(playMusic, 1000);
+});
 
 
 
