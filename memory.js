@@ -257,10 +257,13 @@ const victoryCheck = () => {
         clearInterval(timing);
         document.querySelector("#title").style.width = "80vw";
         document.querySelector("#title").style.marginRight = "0";
-        if (soundMuted == false) {
+        if (soundMuted == false ) {
             themeMusic.pause();
+        }
+        if (soundMuted == false) {
             victorySound.play();
         }
+        setTimeout(playMusic, 5000);
         document.querySelector("#title").textContent = `Victory! TOTAL SCORE: ${gameSize * 625 - (Math.round((elapsed + clicks * 2)/3)*100)} (${elapsed} seconds, ${clicks} clicks)`;
     }
     }
