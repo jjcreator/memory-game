@@ -23,7 +23,7 @@ let setOne = [
     "url(images/setOne/blackswan.jpg)",
     "url(images/setOne/tinybird.jpg)",
     "url(images/setOne/duck.jpg)"
-]
+];
 
 let setTwo = [
     "url(images/setTwo/astronaut.jpg)",
@@ -73,7 +73,6 @@ let setThree = [
     "url(images/setThree/furry.jpg)"
 ];
 
-
 let boxes = document.getElementsByClassName("box");
 let start = document.querySelector("#start");
 let gameSize = 16;
@@ -91,6 +90,16 @@ let chosenTiles = "var(--first-tiles)";
 let easyModeButton = document.querySelector("#easy-mode");
 let mediumModeButton = document.querySelector("#medium-mode");
 let hardModeButton = document.querySelector("#hard-mode");
+let musicButton = document.querySelector("#music-toggle");
+let soundButton = document.querySelector("#sound-toggle")
+let themeMusic = new Audio("./sounds/191725__mika55__synth-loop.wav");
+let clickSound = new Audio("./sounds/321082__benjaminnelan__wooden-hover.wav");
+let errorSound = new Audio("./sounds/371190__plutoniumisotop__lock.wav")
+let foundSound = new Audio("./sounds/325805__wagna__collect.wav");
+let victorySound = new Audio("./sounds/258142__tuudurt__level-win.wav");
+let musicMuted = false;
+let soundMuted = false;
+
 
 // CREATE A IMAGE SET 
 
@@ -108,9 +117,9 @@ const chooseImages = () => {
     }
 }
 
-// RESET GAME BOARD, RANDOMIZE POSITION OF COLORS, OPTIONALLY SET RANDOM COLORS
+// RESET GAME BOARD, RANDOMIZE POSITION OF IMAGES
 
-const randomizeColors = () => {
+const randomizeImages = () => {
     let usedOnce = [];
     let usedTwice = [];
     randomizedArray = [];
@@ -195,6 +204,7 @@ const addEvents = () => {
                 }
             }
             if (revealedBoxes[0] != this) {
+                click();
                 clicks++;
                 if (revealedBoxes.length < 2) {
                     myBox.style.backgroundImage = randomizedArray[num - 1];
@@ -204,11 +214,14 @@ const addEvents = () => {
                     if (revealedBoxes[0].style.backgroundImage != revealedBoxes[1].style.backgroundImage) {
                         revealedBoxes = [];
                         for (let a=0; a<boxes.length; a++) {
-                            boxes[a].classList.add("pointer-none")
+                            boxes[a].classList.add("pointer-none");
                         }
                         setTimeout(function() {
                             for (let b=0; b<boxes.length; b++) {
                                 boxes[b].classList.remove("pointer-none");
+                                if (soundMuted == false) {
+                                    errorSound.play();
+                                }
                             }
                             colorize();
                         }, 550);
@@ -216,6 +229,11 @@ const addEvents = () => {
                     else if (revealedBoxes[0].style.backgroundImage == revealedBoxes[1].style.backgroundImage) {
                         revealedBoxes[0].classList.add("found");
                         revealedBoxes[1].classList.add("found");
+                        if (soundMuted == false) {
+                            foundSound.pause();
+                            foundSound.currentTime = 0;
+                            foundSound.play();
+                        }
                         revealedBoxes = [];
                         colorize();
                     }
@@ -239,10 +257,41 @@ const victoryCheck = () => {
         clearInterval(timing);
         document.querySelector("#title").style.width = "80vw";
         document.querySelector("#title").style.marginRight = "0";
+        if (soundMuted == false) {
+            themeMusic.pause();
+            victorySound.play();
+        }
         document.querySelector("#title").textContent = `Victory! TOTAL SCORE: ${gameSize * 625 - (Math.round((elapsed + clicks * 2)/3)*100)} (${elapsed} seconds, ${clicks} clicks)`;
     }
     }
 }
+
+// AUDIO PLAYER 
+
+const playMusic = () => {
+    themeMusic.loop = true;
+    themeMusic.volume = 0.15;
+    if (!musicMuted) {
+        themeMusic.currentTime = 0;
+        themeMusic.play();
+        
+    }
+    else {
+        themeMusic.pause();
+        themeMusic.currentTime = 0;
+    }
+}
+
+errorSound.volume = 0.25;
+
+const click = () => {
+    if (soundMuted == false) {
+    clickSound.volume = 0.5;
+    clickSound.play();
+}
+    
+}
+
 
 // TIMER
 const timer = () => {
@@ -280,53 +329,59 @@ const gameDifficulty = (boardSize) => {
         game.classList.remove("four-columns");
     }
     addEvents();
-    randomizeColors();
+    randomizeImages();
     reset();
 }
 
 // INITIALIZE GAME
 
 addEvents();
-randomizeColors();
-start.addEventListener("click", randomizeColors);
+randomizeImages();
+playMusic();
+start.addEventListener("click", randomizeImages);
 start.addEventListener("click", reset);
 setOneButton.addEventListener("click", () => {
+    click();
     chosenSet = setOne;
     chosenTiles = "var(--first-tiles)";
     reset();
-    randomizeColors();
+    randomizeImages();
     document.querySelector("body").style.backgroundImage = "var(--first-background)";
     setOneButton.style.backgroundColor = "rgba(97,76,131,0.6)";
     setTwoButton.style.backgroundColor = "transparent";
     setThreeButton.style.backgroundColor = "transparent";
 });
 setTwoButton.addEventListener("click", () => {
+    click();
     chosenSet = setTwo;
     chosenTiles = "var(--second-tiles)";
     reset();
-    randomizeColors();
+    randomizeImages();
     document.querySelector("body").style.backgroundImage = "var(--second-background)";
     setOneButton.style.backgroundColor = "transparent";
     setTwoButton.style.backgroundColor = "rgba(97,76,131,0.6)";
     setThreeButton.style.backgroundColor = "transparent"
 });
 setThreeButton.addEventListener("click", () => {
+    click();
     chosenSet = setThree;
     chosenTiles = "var(--third-tiles)";
     reset();
-    randomizeColors();
+    randomizeImages();
     document.querySelector("body").style.backgroundImage = "var(--third-background)";
     setThreeButton.style.backgroundColor = "rgba(97,76,131,0.8)";
     setOneButton.style.backgroundColor = "transparent";
     setTwoButton.style.backgroundColor = "transparent";
 });
 easyModeButton.addEventListener("click", () => {
+    click();
     gameDifficulty(16);
     easyModeButton.style.backgroundColor = "rgba(97,76,131,0.8)";
     mediumModeButton.style.backgroundColor = "transparent";
     hardModeButton.style.backgroundColor = "transparent";
 });
 mediumModeButton.addEventListener("click", () => {
+    click();
     gameDifficulty(24);
     easyModeButton.style.backgroundColor = "transparent";
     mediumModeButton.style.backgroundColor = "rgba(97,76,131,0.8)";
@@ -334,12 +389,39 @@ mediumModeButton.addEventListener("click", () => {
 
 });
 hardModeButton.addEventListener("click", ()=> {
+    click();
     gameDifficulty(36);
     easyModeButton.style.backgroundColor = "transparent";
     mediumModeButton.style.backgroundColor = "transparent";
     hardModeButton.style.backgroundColor = "rgba(97,76,131,0.7)";
 });
 
+musicButton.addEventListener("click", () => {
+    click();
+    if (musicMuted === true) {
+        musicMuted = false;
+        musicButton.style.backgroundColor = "rgba(97,76,131,0.7)";
+        playMusic();
+    }
+    else {
+        musicMuted = true;
+        musicButton.style.backgroundColor = "transparent";
+        playMusic();
+    }
+});
+
+soundButton.addEventListener("click", () => {
+    if (soundMuted === true) {
+        soundMuted = false;
+        soundButton.style.backgroundColor = "rgba(97,76,131,0.7)";
+    }
+    else {
+        soundMuted = true;
+        soundButton.style.backgroundColor = "transparent";
+    }
+    click();
+
+})
 
 
 
