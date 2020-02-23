@@ -233,6 +233,7 @@ const addEvents = () => {
                         if (soundMuted == false) {
                             foundSound.pause();
                             foundSound.currentTime = 0;
+                            foundSound.volume = 0.3;
                             foundSound.play();
                         }
                         revealedBoxes = [];
@@ -262,6 +263,7 @@ const victoryCheck = () => {
             themeMusic.pause();
         }
         if (soundMuted == false) {
+            victorySound.volume = 0.3;
             victorySound.play();
         }
         setTimeout(playMusic, 5000);
@@ -270,11 +272,11 @@ const victoryCheck = () => {
     }
 }
 
-// AUDIO PLAYER 
+// AUDIO EFFECT FUNCTIONS
 
 const playMusic = () => {
     themeMusic.loop = true;
-    themeMusic.volume = 0.15;
+    themeMusic.volume = 0.03;
     if (!musicMuted) {
         themeMusic.currentTime = 0;
         themeMusic.play();
@@ -289,13 +291,12 @@ const playMusic = () => {
 errorSound.volume = 0.25;
 
 const click = () => {
-    if (soundMuted == false) {
-    clickSound.volume = 0.5;
+    clickSound.volume = 0.2;
+    if (soundMuted == false) { 
     clickSound.play();
 }
     
 }
-
 
 // TIMER
 const timer = () => {
@@ -341,7 +342,6 @@ const gameDifficulty = (boardSize) => {
 
 addEvents();
 randomizeImages();
-playMusic();
 start.addEventListener("click", randomizeImages);
 start.addEventListener("click", reset);
 start.addEventListener("click", click);

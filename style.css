@@ -54,8 +54,8 @@ body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    width: 30%;
-    height: 33%;
+    width: 35%;
+    height: 35%;
     background-color: rgba(26, 168, 233, 0.9);
     z-index: 100;
     padding: 10px;
@@ -70,6 +70,7 @@ body {
 }
 
 #start-message p {
+    font-size: 18px;
     padding: 5px;
     width: 100%;
 }
@@ -78,6 +79,7 @@ body {
     margin-top: auto;
     margin-bottom: 10px;
     width: 40%;
+    max-width: 120px;
     background-color: var(--secondary-color);
     color: white;
     font-size: 20px;
@@ -86,16 +88,17 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    border: 3px outset white;
-    border-radius: 50%;
+    border: 2px solid white;
+    border-radius: 1em;
+    transition: 0.2s ease-in all;
 }
 
 #confirm-button:hover {
-    transform: scale(1.1)
+    transform: scale(1.2)
 }
 
 #confirm-button:active {
-    border: 3px inset gray;
+    border: 2px solid white;
     
 }
 
@@ -188,7 +191,7 @@ body {
 }
 
 #title {
-    margin-right: 86px;
+    margin-right: 40px;
     font-size: 32px;
     font-weight: bold;
 }
@@ -343,6 +346,12 @@ body {
 }
 
 @media only screen and (max-height: 560px) {
+    #start-message {
+        width: 90%;
+        height: 90%;
+    }
+
+    
     #main-header {
         justify-content: flex-start;
         flex-direction: column;
@@ -415,6 +424,19 @@ body {
 }
 
 @media only screen and (max-width: 900px) and (min-height: 561px) {
+    #start-message {
+        width: 50%;
+        height: 40%;
+    }
+
+    #start-message h1 {
+        font-size: 22px;
+    }
+
+    #start-message p {
+        font-size: 15px;
+    }
+
     #left-panel p, #right-panel p {
         display: none;
     }
@@ -487,6 +509,11 @@ body {
 }
 
 @media only screen and (min-width: 901px) and (max-width: 1480px) {
+    #start-message {
+        width: 45%;
+        height: 45%;
+    }
+   
     #left-panel p, #right-panel p {
         display: none;
     }
