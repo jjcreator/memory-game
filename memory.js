@@ -343,6 +343,7 @@ randomizeImages();
 playMusic();
 start.addEventListener("click", randomizeImages);
 start.addEventListener("click", reset);
+start.addEventListener("click", click);
 setOneButton.addEventListener("click", () => {
     click();
     chosenSet = setOne;
