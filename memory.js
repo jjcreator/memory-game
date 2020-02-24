@@ -100,6 +100,7 @@ let victorySound = new Audio("./sounds/258142__tuudurt__level-win.wav");
 let musicMuted = false;
 let soundMuted = false;
 let confirmButton = document.querySelector("#confirm-button");
+let mainGrid = document.querySelector("#main-grid");
 
 
 // CREATE A IMAGE SET 
@@ -147,6 +148,7 @@ const randomizeImages = () => {
 // RESET GAME STATE
 
 const reset = () => {
+    mainGrid.style.display = "grid";
     revealedBoxes = [];
     //time and clicks reset
     clicks = 0;
@@ -264,10 +266,37 @@ const victoryCheck = () => {
             victorySound.volume = 0.3;
             victorySound.play();
         }
+        victoryScreenOn();
         setTimeout(playMusic, 4000);
         document.querySelector("#title").textContent = `Victory! TOTAL SCORE: ${gameSize * 625 - (Math.round((elapsed + clicks * 2)/3)*100)} (${elapsed} seconds, ${clicks} clicks)`;
     }
     }
+}
+// VICTORY SCREEN
+
+const victoryScreenOn = () => {
+    mainGrid.style.display = "none";
+    let victoryScreen = document.querySelector("#victory-screen");
+    let score = (gameSize * 625 - (Math.round((elapsed + clicks * 2)/3)*100));
+    score = 5;
+    victoryScreen.style.display = "flex";
+    victoryScreen.style.transform = "scale(1)";
+    let scoreText = document.querySelector("#score");
+    let bling;
+    let ended = new Promise(function (resolve, reject) {
+        let i = 0;
+        bling = setInterval(()=> {
+            i++;
+            scoreText.innerText = `TOTAL SCORE: ${i}`
+        }, 1000);
+        if (i === score) {
+            resolve();
+        }
+        else {
+            reject();
+        }
+        });
+    ended.then(clearInterval(bling)); 
 }
 
 // AUDIO EFFECT FUNCTIONS
@@ -414,6 +443,7 @@ musicButton.addEventListener("click", () => {
 });
 
 soundButton.addEventListener("click", () => {
+    victoryScreenOn();
     if (soundMuted === true) {
         soundMuted = false;
         soundButton.style.backgroundColor = "rgba(97,76,131,0.7)";
