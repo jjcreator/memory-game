@@ -259,14 +259,12 @@ const victoryCheck = () => {
         clearInterval(timing);
         document.querySelector("#title").style.width = "80vw";
         document.querySelector("#title").style.marginRight = "0";
-        if (soundMuted == false ) {
-            themeMusic.pause();
-        }
+        themeMusic.pause();
         if (soundMuted == false) {
             victorySound.volume = 0.3;
             victorySound.play();
         }
-        setTimeout(playMusic, 5000);
+        setTimeout(playMusic, 4000);
         document.querySelector("#title").textContent = `Victory! TOTAL SCORE: ${gameSize * 625 - (Math.round((elapsed + clicks * 2)/3)*100)} (${elapsed} seconds, ${clicks} clicks)`;
     }
     }
@@ -276,7 +274,7 @@ const victoryCheck = () => {
 
 const playMusic = () => {
     themeMusic.loop = true;
-    themeMusic.volume = 0.03;
+    themeMusic.volume = 0.06;
     if (!musicMuted) {
         themeMusic.currentTime = 0;
         themeMusic.play();
@@ -433,6 +431,7 @@ confirmButton.addEventListener("click", ()=> {
     document.querySelector("#start-overlay").style.transform = "scale(0)";
     setTimeout(playMusic, 1000);
 });
+
 
 
 
