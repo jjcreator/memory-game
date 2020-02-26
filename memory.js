@@ -97,10 +97,12 @@ let clickSound = new Audio("./sounds/321082__benjaminnelan__wooden-hover.wav");
 let errorSound = new Audio("./sounds/371190__plutoniumisotop__lock.wav")
 let foundSound = new Audio("./sounds/325805__wagna__collect.wav");
 let victorySound = new Audio("./sounds/258142__tuudurt__level-win.wav");
+let beepSound = new Audio("./sounds/350876__cabled-mess__coin-c-09.wav")
 let musicMuted = false;
 let soundMuted = false;
 let confirmButton = document.querySelector("#confirm-button");
 let mainGrid = document.querySelector("#main-grid");
+let victoryScreen = document.querySelector("#victory-screen");
 
 
 // CREATE A IMAGE SET 
@@ -149,6 +151,7 @@ const randomizeImages = () => {
 
 const reset = () => {
     mainGrid.style.display = "grid";
+    victoryScreen.style.display = "none";
     revealedBoxes = [];
     //time and clicks reset
     clicks = 0;
@@ -267,36 +270,40 @@ const victoryCheck = () => {
             victorySound.play();
         }
         victoryScreenOn();
-        setTimeout(playMusic, 4000);
-        document.querySelector("#title").textContent = `Victory! TOTAL SCORE: ${gameSize * 625 - (Math.round((elapsed + clicks * 2)/3)*100)} (${elapsed} seconds, ${clicks} clicks)`;
+        setTimeout(playMusic, 5000);
+        document.querySelector("#title").textContent = `BOOM !!!`;
     }
     }
 }
 // VICTORY SCREEN
 
+const bling = (value, textNode, time, basis) => {
+    let increase = 0;
+    const countUp = (value, textNode) => {
+    if (increase === value) {
+        clearInterval(counting);
+    }
+    else {
+        increase += basis;
+        textNode.innerText = increase;
+        beepSound.play();
+    }
+}
+    let counting = setInterval(countUp, time, value, textNode);
+}
+
 const victoryScreenOn = () => {
-    mainGrid.style.display = "none";
-    let victoryScreen = document.querySelector("#victory-screen");
-    let score = (gameSize * 625 - (Math.round((elapsed + clicks * 2)/3)*100));
-    score = 5;
-    victoryScreen.style.display = "flex";
-    victoryScreen.style.transform = "scale(1)";
     let scoreText = document.querySelector("#score");
-    let bling;
-    let ended = new Promise(function (resolve, reject) {
-        let i = 0;
-        bling = setInterval(()=> {
-            i++;
-            scoreText.innerText = `TOTAL SCORE: ${i}`
-        }, 1000);
-        if (i === score) {
-            resolve();
-        }
-        else {
-            reject();
-        }
-        });
-    ended.then(clearInterval(bling)); 
+    let timeScoreText = document.querySelector("#time-score");
+    let clicksText = document.querySelector("#click-score");
+    let score = (gameSize * 625 - (Math.round((elapsed + clicks * 2)/3)*100));
+    mainGrid.style.display = "none";
+    timeScoreText.innerText = elapsed;
+    clicksText.innerText = clicks;
+    victoryScreen.style.display = "flex";
+    bling(score, scoreText, 7.5, 25);
+    //bling(elapsed, timeScoreText, 100, 1);
+    //bling(clicks, clicksText, 100, 1);
 }
 
 // AUDIO EFFECT FUNCTIONS

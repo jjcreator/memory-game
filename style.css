@@ -62,6 +62,7 @@ body {
     border: 3px white solid;
     border-radius: 50px;
     align-items: center;
+    justify-content: center;
 }
 
 #start-message h1 {
@@ -273,7 +274,7 @@ body {
 }
 
 #main-grid {
-    display: none;
+    display: grid;
     max-width: fit-content;
     margin: 0 auto;
     grid-gap: 25px;
@@ -352,22 +353,32 @@ body {
     width: 60vh;
     margin: 0 auto;
     background-color: var(--secondary-color);
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border: 5px outset gold;
     border-radius: 1em;
     color: gold;
-    transform: scale(1);
-    transition: ease-in 1s transform;
+    transition: all ease-in 1s;
+    font-size: 25px;
+    animation: appear 0.5s ease-in forwards;
+}
+
+@keyframes appear {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 #victory-screen h2 {
     text-align: center;
     color: gold;
     padding: 10px;
-    font-size: 30px;
+    font-size: 45px;
 }
 
 #trophy {
@@ -375,13 +386,26 @@ body {
     width: auto;
 }
 
-#score {
-    font-size: 25px;
+#score-details {
+    display: flex;
+    justify-content: center;
 }
 
-#victory-screen p {
+.score-text {
+    padding: 10px;
+    color: white;
+}
+
+#score-details p {
+    text-align: center;
     font-size: 20px;
 }
+
+#total {
+    font-size: 30px;
+}
+
+
 
 #stars-container {
     display: flex;
