@@ -304,6 +304,44 @@ const victoryScreenOn = () => {
     bling(score, scoreText, 7.5, 25);
     //bling(elapsed, timeScoreText, 100, 1);
     //bling(clicks, clicksText, 100, 1);
+    const awardStars = () => {
+        if (gameSize === 16) {
+            if (score <=2000) return 1;
+            if (score <=4000) return 2;
+            if (score <=6000) return 3;
+            if (score <=8000) return 4;
+            if (score > 8000) return 5;
+                }
+        else if (gameSize === 24) {
+            if (score <=2000) return 1;
+            if (score <=4000) return 2;
+            if (score <=6000) return 3;
+            if (score <=8000) return 4;
+            if (score > 8000) return 5;
+                }
+        else if (gameSize === 36) {
+            if (score <=2000) return 1;
+            if (score <=4000) return 2;
+            if (score <=6000) return 3;
+            if (score <=8000) return 4;
+            if (score > 8000) return 5;
+                }
+            }
+    drawStars(awardStars());
+}
+
+const drawStars = (starNumber) => {
+    let starContainer = document.querySelector("#stars-container");
+    let goldenStar = "<div><img src='./images/backgrounds/star2.svg' alt='a golden star'></div>";
+    let blackStar = "<div><img src='./images/backgrounds/blackStar.svg' alt='a black star'></div>"
+    starContainer.innerHTML = "";
+    for (let i=1; i <= starNumber; i++) {
+        starContainer.innerHTML +=goldenStar;
+    }
+    for (let k=1; k <= 5 - starNumber; k++) {
+        starContainer.innerHTML +=blackStar;
+    }
+
 }
 
 // AUDIO EFFECT FUNCTIONS
