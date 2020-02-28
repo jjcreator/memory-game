@@ -286,7 +286,10 @@ const bling = (value, textNode, time, basis) => {
     else {
         increase += basis;
         textNode.innerText = increase;
-        beepSound.play();
+        if (!soundMuted) {
+            beepSound.play();
+        }
+        
     }
 }
     let counting = setInterval(countUp, time, value, textNode);
@@ -313,18 +316,18 @@ const victoryScreenOn = () => {
             if (score > 8000) return 5;
                 }
         else if (gameSize === 24) {
-            if (score <=2000) return 1;
-            if (score <=4000) return 2;
-            if (score <=6000) return 3;
-            if (score <=8000) return 4;
-            if (score > 8000) return 5;
+            if (score <=4000) return 1;
+            if (score <=6000) return 2;
+            if (score <=8000) return 3;
+            if (score <=10000) return 4;
+            if (score > 10000) return 5;
                 }
         else if (gameSize === 36) {
-            if (score <=2000) return 1;
-            if (score <=4000) return 2;
-            if (score <=6000) return 3;
-            if (score <=8000) return 4;
-            if (score > 8000) return 5;
+            if (score <=9000) return 1;
+            if (score <=11000) return 2;
+            if (score <=13000) return 3;
+            if (score <=16000) return 4;
+            if (score > 16000) return 5;
                 }
             }
     drawStars(awardStars());

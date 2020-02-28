@@ -353,7 +353,7 @@ body {
     width: 60vh;
     margin: 0 auto;
     background-color: var(--secondary-color);
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -362,16 +362,7 @@ body {
     color: gold;
     transition: all ease-in 1s;
     font-size: 25px;
-    animation: appear 0.5s ease-in forwards;
-}
-
-@keyframes appear {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1);
-    }
+    animation: pop 0.5s ease-in forwards;
 }
 
 #victory-screen h2 {
@@ -405,8 +396,6 @@ body {
     font-size: 30px;
 }
 
-
-
 #stars-container {
     display: flex;
     justify-content: center;
@@ -432,7 +421,7 @@ body {
 }
 
 #stars-container img {
-    height: 90px;
+    height: 65px;
     width: auto;
 }
 
@@ -445,6 +434,43 @@ body {
         width: 90%;
         height: 90%;
     }
+
+    #victory-screen {
+        height: 40vw;
+        width: 40vw;
+        border: 3px outset gold;
+    }
+
+    #victory-screen h2 {
+        padding: 5px;
+        font-size: 20px;
+    }
+
+    #score-details p {
+        text-align: center;
+        font-size: 14px;
+    }
+    
+    #total {
+        font-size: 20px;
+    }
+    
+    #stars-container {
+        display: flex;
+        justify-content: center;
+        margin: 5px auto;
+    }
+    
+    #stars-container img {
+        height: 25px;
+        width: auto;
+    }
+
+    #trophy {
+        height: 40%;
+        width: auto;
+    }
+    
 
     
     #main-header {
