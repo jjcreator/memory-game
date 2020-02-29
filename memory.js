@@ -491,7 +491,6 @@ musicButton.addEventListener("click", () => {
 });
 
 soundButton.addEventListener("click", () => {
-    victoryScreenOn();
     if (soundMuted === true) {
         soundMuted = false;
         soundButton.style.backgroundColor = "rgba(97,76,131,0.7)";

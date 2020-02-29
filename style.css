@@ -256,6 +256,7 @@ body {
     }
 
 #start:hover {
+    font-weight: bolder;
     box-shadow: 0px 0px 2px black;
 }
 
@@ -429,15 +430,15 @@ body {
 
 /* ------- Media Queries -------*/
 
-@media only screen and (max-height: 560px) {
+@media only screen and (max-height: 568px) {
     #start-message {
         width: 90%;
         height: 90%;
     }
 
     #victory-screen {
-        height: 40vw;
-        width: 40vw;
+        height: 45vw;
+        width: 45vw;
         border: 3px outset gold;
     }
 
@@ -458,7 +459,7 @@ body {
     #stars-container {
         display: flex;
         justify-content: center;
-        margin: 5px auto;
+        margin: 0px auto;
     }
     
     #stars-container img {
@@ -470,8 +471,6 @@ body {
         height: 40%;
         width: auto;
     }
-    
-
     
     #main-header {
         justify-content: flex-start;
@@ -544,7 +543,7 @@ body {
 
 }
 
-@media only screen and (max-width: 900px) and (min-height: 561px) {
+@media only screen and (max-width: 900px) and (min-height: 568px) {
     #start-message {
         width: 50%;
         height: 40%;
@@ -626,6 +625,41 @@ body {
     .box {
         width: 14vw;
         height: 14vw;
+    }
+    #victory-screen {
+        height: 55vh;
+        width: 55vh;
+        border: 3px outset gold;
+    }
+
+    #victory-screen h2 {
+        padding: 5px;
+        font-size: 20px;
+    }
+
+    #score-details p {
+        text-align: center;
+        font-size: 14px;
+    }
+    
+    #total {
+        font-size: 20px;
+    }
+    
+    #stars-container {
+        display: flex;
+        justify-content: center;
+        margin: 5px auto;
+    }
+    
+    #stars-container img {
+        height: 45px;
+        width: auto;
+    }
+
+    #trophy {
+        height: 40%;
+        width: auto;
     }
 }
 
