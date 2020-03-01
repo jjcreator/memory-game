@@ -460,6 +460,8 @@ body {
         display: flex;
         justify-content: center;
         margin: 0px auto;
+        min-width: 100%;
+        border: 3px solid black;
     }
     
     #stars-container img {

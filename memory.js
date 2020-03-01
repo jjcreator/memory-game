@@ -92,7 +92,7 @@ let mediumModeButton = document.querySelector("#medium-mode");
 let hardModeButton = document.querySelector("#hard-mode");
 let musicButton = document.querySelector("#music-toggle");
 let soundButton = document.querySelector("#sound-toggle")
-let themeMusic = new Audio("./sounds/191725__mika55__synth-loop.wav");
+let themeMusic = new Audio("./sounds/191725__mika55__synth-loop.mp3");
 let clickSound = new Audio("./sounds/321082__benjaminnelan__wooden-hover.wav");
 let errorSound = new Audio("./sounds/371190__plutoniumisotop__lock.wav")
 let foundSound = new Audio("./sounds/325805__wagna__collect.wav");
@@ -304,16 +304,6 @@ const victoryScreenOn = () => {
     let timeScoreText = document.querySelector("#time-score");
     let clicksText = document.querySelector("#click-score");
     let score = (gameSize * 625 - (Math.round((elapsed + clicks * 2)/3)*100));
-    mainGrid.style.display = "none";
-    timeScoreText.innerText = elapsed;
-    clicksText.innerText = clicks;
-    resetVictory();
-    victoryScreen.style.display = "flex";
-    bling(elapsed, timeScoreText, 50, 1, ()=> {
-        bling(clicks, clicksText, 50, 1, ()=> {
-            bling(score, scoreText, 7.5, 25, drawStars, awardStars());
-        })
-    });
     const awardStars = () => {
         if (gameSize === 16) {
             if (score <=2000) return 1;
@@ -337,20 +327,23 @@ const victoryScreenOn = () => {
             if (score > 16000) return 5;
                 }
             }
-    
+    mainGrid.style.display = "none";
+    timeScoreText.innerText = elapsed;
+    clicksText.innerText = clicks;
+    resetVictory();
+    victoryScreen.style.display = "flex";
+    bling(elapsed, timeScoreText, 50, 1, ()=> {
+        bling(clicks, clicksText, 50, 1, ()=> {
+            bling(score, scoreText, 7.5, 25, drawStars, awardStars());
+        })
+    });
 }
 
 const drawStars = (starNumber) => {
     let goldenStar = "<img src='./images/backgrounds/star2.svg' alt='a golden star'>";
-    let blackStar = "<img src='./images/backgrounds/blackStar.svg' alt='a black star'>";
-    for (let k=1; k<6; k++) {
-        let currentStar = "#star" + k.toString();
-        document.querySelector(currentStar).innerHTML = blackStar;
-    }
     for (let i=1; i <= starNumber; i++) {
         setTimeout(()=> {
             let currentStar = "#star" + i.toString();
-            console.log(currentStar);
             document.querySelector(currentStar).innerHTML = goldenStar;
             beepSound.play();
         }, i * 500)  
