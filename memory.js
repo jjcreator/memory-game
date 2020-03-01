@@ -252,7 +252,7 @@ const addEvents = () => {
 
 };
 
-// CHECK FOR POINTS
+// CHECK FOR VICTORY
 
 const victoryCheck = () => {
     let victory = 0;
@@ -270,24 +270,28 @@ const victoryCheck = () => {
             victorySound.play();
         }
         victoryScreenOn();
-        setTimeout(playMusic, 5000);
+        setTimeout(playMusic, 9000);
         document.querySelector("#title").textContent = `BOOM !!!`;
     }
     }
 }
 // VICTORY SCREEN
 
-const bling = (value, textNode, time, basis) => {
+const bling = (value, textNode, time, basis, callback, a, b, c, d) => {
     let increase = 0;
     const countUp = (value, textNode) => {
     if (increase === value) {
         clearInterval(counting);
+        callback(a, b, c, d);
     }
     else {
         increase += basis;
         textNode.innerText = increase;
         if (!soundMuted) {
-            beepSound.play();
+            if (value > 500) {
+                beepSound.play();
+            }
+            else clickSound.play();
         }
         
     }
@@ -303,10 +307,13 @@ const victoryScreenOn = () => {
     mainGrid.style.display = "none";
     timeScoreText.innerText = elapsed;
     clicksText.innerText = clicks;
+    resetVictory();
     victoryScreen.style.display = "flex";
-    bling(score, scoreText, 7.5, 25);
-    //bling(elapsed, timeScoreText, 100, 1);
-    //bling(clicks, clicksText, 100, 1);
+    bling(elapsed, timeScoreText, 50, 1, ()=> {
+        bling(clicks, clicksText, 50, 1, ()=> {
+            bling(score, scoreText, 7.5, 25, drawStars, awardStars());
+        })
+    });
     const awardStars = () => {
         if (gameSize === 16) {
             if (score <=2000) return 1;
@@ -330,28 +337,42 @@ const victoryScreenOn = () => {
             if (score > 16000) return 5;
                 }
             }
-    drawStars(awardStars());
+    
 }
 
 const drawStars = (starNumber) => {
-    let starContainer = document.querySelector("#stars-container");
-    let goldenStar = "<div><img src='./images/backgrounds/star2.svg' alt='a golden star'></div>";
-    let blackStar = "<div><img src='./images/backgrounds/blackStar.svg' alt='a black star'></div>"
-    starContainer.innerHTML = "";
-    for (let i=1; i <= starNumber; i++) {
-        starContainer.innerHTML +=goldenStar;
+    let goldenStar = "<img src='./images/backgrounds/star2.svg' alt='a golden star'>";
+    let blackStar = "<img src='./images/backgrounds/blackStar.svg' alt='a black star'>";
+    for (let k=1; k<6; k++) {
+        let currentStar = "#star" + k.toString();
+        document.querySelector(currentStar).innerHTML = blackStar;
     }
-    for (let k=1; k <= 5 - starNumber; k++) {
-        starContainer.innerHTML +=blackStar;
+    for (let i=1; i <= starNumber; i++) {
+        setTimeout(()=> {
+            let currentStar = "#star" + i.toString();
+            console.log(currentStar);
+            document.querySelector(currentStar).innerHTML = goldenStar;
+            beepSound.play();
+        }, i * 500)  
     }
 
+}
+
+const resetVictory = () => {
+    document.querySelector("#score").innerText = "0";
+    document.querySelector("#time-score").innerText = "0";
+    document.querySelector("#click-score").innerText = "0";
+    for (let k=1; k<6; k++) {
+        let currentStar = "#star" + k.toString();
+        document.querySelector(currentStar).innerHTML = "<img src='./images/backgrounds/blackStar.svg' alt='a black star'>";
+    }
 }
 
 // AUDIO EFFECT FUNCTIONS
 
 const playMusic = () => {
     themeMusic.loop = true;
-    themeMusic.volume = 0.06;
+    themeMusic.volume = 0.25;
     if (!musicMuted) {
         themeMusic.currentTime = 0;
         themeMusic.play();
