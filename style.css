@@ -434,7 +434,8 @@ body {
 
 /* ------- Media Queries -------*/
 
-@media only screen and (max-height: 568px) {
+
+@media only screen and (max-height: 568px) and (min-width: 350px) {
     #start-message {
         width: 90%;
         height: 90%;
