@@ -277,26 +277,27 @@ const victoryCheck = () => {
 }
 // VICTORY SCREEN
 
-const bling = (value, textNode, time, basis, callback, a, b, c, d) => {
-    let increase = 0;
-    const countUp = (value, textNode) => {
-    if (increase === value) {
-        clearInterval(counting);
-        callback(a, b, c, d);
-    }
-    else {
-        increase += basis;
-        textNode.innerText = increase;
-        if (!soundMuted) {
-            if (value > 500) {
-                beepSound.play();
+const bling = (value, textNode, time, basis) => {
+    return new Promise((resolve, reject) => {    
+        let increase = 0;
+        const countUp = (value, textNode) => {
+            if (increase === value) {
+                clearInterval(counting);
+                resolve();
             }
+            else {
+                increase += basis;
+                textNode.innerText = increase;
+            if (!soundMuted) {
+                if (value > 500) {
+                    beepSound.play();
+                }
             else clickSound.play();
+                }
+            }
         }
-        
-    }
-}
     let counting = setInterval(countUp, time, value, textNode);
+    });
 }
 
 const victoryScreenOn = () => {
@@ -332,12 +333,11 @@ const victoryScreenOn = () => {
     clicksText.innerText = clicks;
     resetVictory();
     victoryScreen.style.display = "flex";
-    bling(elapsed, timeScoreText, 50, 1, ()=> {
-        bling(clicks, clicksText, 50, 1, ()=> {
-            bling(score, scoreText, 7.5, 25, drawStars, awardStars());
-        })
-    });
-}
+    
+    bling(elapsed, timeScoreText, 50, 1)
+        .then(()=> bling(clicks, clicksText, 50, 1)
+            .then(()=> bling(score, scoreText, 7.5, 25)
+                .then(()=> drawStars(awardStars()))));
 
 const drawStars = (starNumber) => {
     let goldenStar = "<img src='./images/backgrounds/star2.svg' alt='a golden star'>";
@@ -349,6 +349,7 @@ const drawStars = (starNumber) => {
         }, i * 500)  
     }
 
+}
 }
 
 const resetVictory = () => {
