@@ -23,7 +23,7 @@ let setOne = [
     "url(images/setOne/blackswan.jpg)",
     "url(images/setOne/tinybird.jpg)",
     "url(images/setOne/duck.jpg)"
-]
+];
 
 let setTwo = [
     "url(images/setTwo/astronaut.jpg)",
@@ -73,7 +73,6 @@ let setThree = [
     "url(images/setThree/furry.jpg)"
 ];
 
-
 let boxes = document.getElementsByClassName("box");
 let start = document.querySelector("#start");
 let gameSize = 16;
@@ -91,6 +90,20 @@ let chosenTiles = "var(--first-tiles)";
 let easyModeButton = document.querySelector("#easy-mode");
 let mediumModeButton = document.querySelector("#medium-mode");
 let hardModeButton = document.querySelector("#hard-mode");
+let musicButton = document.querySelector("#music-toggle");
+let soundButton = document.querySelector("#sound-toggle")
+let themeMusic = new Audio("sounds/191725__mika55__synth-loop.mp3");
+let clickSound = new Audio("sounds/321082__benjaminnelan__wooden-hover.wav");
+let errorSound = new Audio("sounds/371190__plutoniumisotop__lock.wav")
+let foundSound = new Audio("sounds/325805__wagna__collect.wav");
+let victorySound = new Audio("sounds/258142__tuudurt__level-win.wav");
+let beepSound = new Audio("sounds/350876__cabled-mess__coin-c-09.wav")
+let musicMuted = false;
+let soundMuted = false;
+let confirmButton = document.querySelector("#confirm-button");
+let mainGrid = document.querySelector("#main-grid");
+let victoryScreen = document.querySelector("#victory-screen");
+
 
 // CREATE A IMAGE SET 
 
@@ -108,9 +121,9 @@ const chooseImages = () => {
     }
 }
 
-// RESET GAME BOARD, RANDOMIZE POSITION OF COLORS, OPTIONALLY SET RANDOM COLORS
+// RESET GAME BOARD, RANDOMIZE POSITION OF IMAGES
 
-const randomizeColors = () => {
+const randomizeImages = () => {
     let usedOnce = [];
     let usedTwice = [];
     randomizedArray = [];
@@ -137,6 +150,14 @@ const randomizeColors = () => {
 // RESET GAME STATE
 
 const reset = () => {
+    mainGrid.style.display = "grid";
+    victoryScreen.style.display = "none";
+    revealedBoxes = [];
+    //time and clicks reset
+    clicks = 0;
+    clearInterval(timing);
+    elapsed = 0;
+    time.innerText = "0";
     //reset button disappears
     start.style.display = "none";
     //timer disappears
@@ -145,11 +166,6 @@ const reset = () => {
     document.querySelector("#tile-select").style.display = "flex";
     document.querySelector("#difficulty").style.display = "flex";
     document.querySelector("#music").style.display = "flex";
-    //time and clicks reset
-    clicks = 0;
-    clearInterval(timing);
-    elapsed = 0;
-    time.innerText = "0";
     //main text resets and animates
     let h1 = document.querySelector("#title");
     h1.style.width = "50vw";
@@ -167,14 +183,17 @@ const reset = () => {
 const addEvents = () => {
     for (let k=0; k<boxes.length; k++) {
         boxes[k].addEventListener("click", function() {
+            //variable declarations
+            let myBox = this;
+            let num = parseInt(this.id.match(/[0-9]+/g));
+            let h1 = document.querySelector("#title");
             //reset button appears
-            start.style.display = "block";
+            start.style.display = "flex";
             // makes options disappear
             document.querySelector("#tile-select").style.display = "none";
             document.querySelector("#difficulty").style.display = "none";
             document.querySelector("#music").style.display = "none";
             // disables text animation
-            let h1 = document.querySelector("#title");
             h1.classList.remove("animated");
             h1.textContent = "Let's go!!!";
             // starts timer
@@ -182,12 +201,7 @@ const addEvents = () => {
             if (clicks == 0) {
                 timing = setInterval(timer, 1000);
             }
-            // count clicks
-            if (revealedBoxes[0] != this) {
-            clicks++;
-            let colorReset = 0;
-            let myBox = this;
-            let num = parseInt(this.id.match(/[0-9]+/g));
+            // sets backgrounds back to tile back
             const colorize = () => {
                 for (let n=0; n<boxes.length; n++) {
                     if (!boxes[n].classList.contains("found")) {
@@ -195,38 +209,50 @@ const addEvents = () => {
                     }
                 }
             }
-            if (revealedBoxes.length < 2) {
-                myBox.style.backgroundImage = randomizedArray[num - 1];
-                revealedBoxes.push(myBox);
-            }
-            if (revealedBoxes.length == 2) {
-                if (revealedBoxes[0].style.backgroundImage != revealedBoxes[1].style.backgroundImage) {
-                    revealedBoxes = [];
-                    for (let a=0; a<boxes.length; a++) {
-                        boxes[a].classList.add("pointer-none")
-                    }
-                    setTimeout(function() {
-                        for (let b=0; b<boxes.length; b++) {
-                            boxes[b].classList.remove("pointer-none");
-                        }
-                        colorize();
-                    }, 450);
+            if (revealedBoxes[0] != this) {
+                click();
+                clicks++;
+                if (revealedBoxes.length < 2) {
+                    myBox.style.backgroundImage = randomizedArray[num - 1];
+                    revealedBoxes.push(myBox);
                 }
-                else if (revealedBoxes[0].style.backgroundImage == revealedBoxes[1].style.backgroundImage) {
-                    revealedBoxes[0].classList.add("found");
-                    revealedBoxes[1].classList.add("found");
-                    revealedBoxes = [];
-                    colorize();
-                    
+                if (revealedBoxes.length == 2) {
+                    if (revealedBoxes[0].style.backgroundImage != revealedBoxes[1].style.backgroundImage) {
+                        revealedBoxes = [];
+                        for (let a=0; a<boxes.length; a++) {
+                            boxes[a].classList.add("pointer-none");
+                        }
+                        setTimeout(function() {
+                            for (let b=0; b<boxes.length; b++) {
+                                boxes[b].classList.remove("pointer-none");
+                                if (soundMuted == false) {
+                                    errorSound.play();
+                                }
+                            }
+                            colorize();
+                        }, 550);
+                    }
+                    else if (revealedBoxes[0].style.backgroundImage == revealedBoxes[1].style.backgroundImage) {
+                        revealedBoxes[0].classList.add("found");
+                        revealedBoxes[1].classList.add("found");
+                        if (soundMuted == false) {
+                            foundSound.pause();
+                            foundSound.currentTime = 0;
+                            foundSound.volume = 0.3;
+                            foundSound.play();
+                        }
+                        revealedBoxes = [];
+                        colorize();
+                    }
                 }
             }
         victoryCheck();
-    }}
+    }
         )};
 
 };
 
-// CHECK FOR POINTS
+// CHECK FOR VICTORY
 
 const victoryCheck = () => {
     let victory = 0;
@@ -238,9 +264,128 @@ const victoryCheck = () => {
         clearInterval(timing);
         document.querySelector("#title").style.width = "80vw";
         document.querySelector("#title").style.marginRight = "0";
-        document.querySelector("#title").textContent = `Victory! TOTAL SCORE: ${gameSize * 625 - (Math.round((elapsed + clicks * 2)/3)*100)} (${elapsed} seconds, ${clicks} clicks)`;
+        themeMusic.pause();
+        if (soundMuted == false) {
+            victorySound.volume = 0.3;
+            victorySound.play();
+        }
+        victoryScreenOn();
+        setTimeout(playMusic, 9000);
+        document.querySelector("#title").textContent = `BOOM !!!`;
     }
     }
+}
+// VICTORY SCREEN
+
+const bling = (value, textNode, time, basis) => {
+    return new Promise((resolve, reject) => {    
+        let increase = 0;
+        const countUp = (value, textNode) => {
+            if (increase === value) {
+                clearInterval(counting);
+                resolve();
+            }
+            else {
+                increase += basis;
+                textNode.innerText = increase;
+                if (!soundMuted) {
+                    if (value > 500) {
+                        beepSound.play();
+                    }
+                    else clickSound.play();
+                }
+            }
+        }
+    let counting = setInterval(countUp, time, value, textNode);
+    });
+}
+
+const victoryScreenOn = () => {
+    let scoreText = document.querySelector("#score");
+    let timeScoreText = document.querySelector("#time-score");
+    let clicksText = document.querySelector("#click-score");
+    let score = (gameSize * 625 - (Math.round((elapsed + clicks * 2)/3)*100));
+    const awardStars = () => {
+        if (gameSize === 16) {
+            if (score <=2000) return 1;
+            if (score <=4000) return 2;
+            if (score <=6000) return 3;
+            if (score <=8000) return 4;
+            if (score > 8000) return 5;
+                }
+        else if (gameSize === 24) {
+            if (score <=4000) return 1;
+            if (score <=6000) return 2;
+            if (score <=8000) return 3;
+            if (score <=10000) return 4;
+            if (score > 10000) return 5;
+                }
+        else if (gameSize === 36) {
+            if (score <=9000) return 1;
+            if (score <=11000) return 2;
+            if (score <=13000) return 3;
+            if (score <=16000) return 4;
+            if (score > 16000) return 5;
+                }
+            }
+    mainGrid.style.display = "none";
+    timeScoreText.innerText = elapsed;
+    clicksText.innerText = clicks;
+    resetVictory();
+    victoryScreen.style.display = "flex";
+    
+    bling(elapsed, timeScoreText, 50, 1)
+        .then(()=> bling(clicks, clicksText, 50, 1)
+            .then(()=> bling(score, scoreText, 7.5, 25)
+                .then(()=> drawStars(awardStars()))));
+
+const drawStars = (starNumber) => {
+    let goldenStar = "<img src='./images/backgrounds/star2.svg' alt='a golden star'>";
+    for (let i=1; i <= starNumber; i++) {
+        setTimeout(()=> {
+            let currentStar = "#star" + i.toString();
+            document.querySelector(currentStar).innerHTML = goldenStar;
+            beepSound.play();
+        }, i * 500)  
+    }
+
+}
+}
+
+const resetVictory = () => {
+    document.querySelector("#score").innerText = "0";
+    document.querySelector("#time-score").innerText = "0";
+    document.querySelector("#click-score").innerText = "0";
+    for (let k=1; k<6; k++) {
+        let currentStar = "#star" + k.toString();
+        document.querySelector(currentStar).innerHTML = "<img src='./images/backgrounds/blackStar.svg' alt='a black star'>";
+    }
+}
+
+// AUDIO EFFECT FUNCTIONS
+
+const playMusic = () => {
+    themeMusic.loop = true;
+    themeMusic.volume = 0.25;
+    if (!musicMuted) {
+        themeMusic.currentTime = 0;
+        themeMusic.play();
+        
+    }
+    else {
+        themeMusic.pause();
+        themeMusic.currentTime = 0;
+    }
+}
+
+errorSound.volume = 0.25;
+
+const click = () => {
+    clickSound.volume = 0.2;
+    if (soundMuted == false) { 
+    clickSound.play();
+}
+    
 }
 
 // TIMER
@@ -279,57 +424,102 @@ const gameDifficulty = (boardSize) => {
         game.classList.remove("four-columns");
     }
     addEvents();
-    randomizeColors();
+    randomizeImages();
     reset();
 }
-
-// REMOVE EVENTS 
-
-/*const removeEvents = (givenArray) => {
-    for (let a=0; a<givenArray.length; a++) {
-        givenArray[a].
-    }
-
-}*/
 
 // INITIALIZE GAME
 
 addEvents();
-randomizeColors();
-start.addEventListener("click", randomizeColors);
+randomizeImages();
+start.addEventListener("click", randomizeImages);
 start.addEventListener("click", reset);
+start.addEventListener("click", click);
 setOneButton.addEventListener("click", () => {
+    click();
     chosenSet = setOne;
     chosenTiles = "var(--first-tiles)";
     reset();
-    randomizeColors();
+    randomizeImages();
     document.querySelector("body").style.backgroundImage = "var(--first-background)";
+    setOneButton.style.backgroundColor = "rgba(97,76,131,0.6)";
+    setTwoButton.style.backgroundColor = "transparent";
+    setThreeButton.style.backgroundColor = "transparent";
 });
 setTwoButton.addEventListener("click", () => {
+    click();
     chosenSet = setTwo;
     chosenTiles = "var(--second-tiles)";
     reset();
-    randomizeColors();
+    randomizeImages();
     document.querySelector("body").style.backgroundImage = "var(--second-background)";
+    setOneButton.style.backgroundColor = "transparent";
+    setTwoButton.style.backgroundColor = "rgba(97,76,131,0.6)";
+    setThreeButton.style.backgroundColor = "transparent"
 });
 setThreeButton.addEventListener("click", () => {
+    click();
     chosenSet = setThree;
     chosenTiles = "var(--third-tiles)";
     reset();
-    randomizeColors();
+    randomizeImages();
     document.querySelector("body").style.backgroundImage = "var(--third-background)";
+    setThreeButton.style.backgroundColor = "rgba(97,76,131,0.8)";
+    setOneButton.style.backgroundColor = "transparent";
+    setTwoButton.style.backgroundColor = "transparent";
 });
 easyModeButton.addEventListener("click", () => {
+    click();
     gameDifficulty(16);
+    easyModeButton.style.backgroundColor = "rgba(97,76,131,0.8)";
+    mediumModeButton.style.backgroundColor = "transparent";
+    hardModeButton.style.backgroundColor = "transparent";
 });
 mediumModeButton.addEventListener("click", () => {
+    click();
     gameDifficulty(24);
+    easyModeButton.style.backgroundColor = "transparent";
+    mediumModeButton.style.backgroundColor = "rgba(97,76,131,0.8)";
+    hardModeButton.style.backgroundColor = "transparent";
 
 });
 hardModeButton.addEventListener("click", ()=> {
+    click();
     gameDifficulty(36);
+    easyModeButton.style.backgroundColor = "transparent";
+    mediumModeButton.style.backgroundColor = "transparent";
+    hardModeButton.style.backgroundColor = "rgba(97,76,131,0.7)";
 });
 
+musicButton.addEventListener("click", () => {
+    click();
+    if (musicMuted === true) {
+        musicMuted = false;
+        musicButton.style.backgroundColor = "rgba(97,76,131,0.7)";
+        playMusic();
+    }
+    else {
+        musicMuted = true;
+        musicButton.style.backgroundColor = "transparent";
+        playMusic();
+    }
+});
 
+soundButton.addEventListener("click", () => {
+    if (soundMuted === true) {
+        soundMuted = false;
+        soundButton.style.backgroundColor = "rgba(97,76,131,0.7)";
+    }
+    else {
+        soundMuted = true;
+        soundButton.style.backgroundColor = "transparent";
+    }
+    click();
 
+});
 
+confirmButton.addEventListener("click", ()=> {
+    document.querySelector("#start-overlay").style.backgroundColor = "transparent";
+    document.querySelector("#start-overlay").style.transform = "scale(0)";
+    setTimeout(playMusic, 1000);
+});
