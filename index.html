@@ -4,28 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to the Memory Game</title>
-    <link rel="stylesheet" href="/style.css" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Tomorrow&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="start-overlay">
+        <div id="start-message">
+            <h1>The Memory Game</h1>
+            <p>This is a timed challenge in which you have to find all the matching pairs in the shortest time possible, with as few clicks as possible!</p>
+            <p>You can select the tileset and the difficulty level in the top menu. You can also adjust audio options there.</p>
+            <p>Game starts automatically after you click one of the boxes.</p>
+            <div id="confirm-button">OK</div>
+        </div>
+    </div>
     <header id="main-header">
-        <div class="controls" id="left-panel">
-            <div id="timer"><span id="time">0</span></div>
+        <div class="controls" id="left-panel">  
+            <div id="timer"><span id="time">0</span> </div>
             <div id="tile-select" class="button-row">
-                <p>TILESET:</p>
-                <div class="buttons">
-                    <button class="game-button small" id="first-tileset" type="button">SET 1</button>
-                    <button class="game-button small" id="second-tileset" type="button">SET 2</button>
-                    <button class="game-button small" id="third-tileset" type="button">SET 3</button>
-                </div>
+                <p class="game-button label">TILESET:</p>
+                <div class="game-button clickable" id="first-tileset">SET 1</div>
+                <div class="game-button clickable" id="second-tileset">SET 2</div>
+                <div class="game-button clickable" id="third-tileset">SET 3</div>
             </div>
             <div id="difficulty" class="button-row">
-                <p>DIFFICULTY:</p>
-                <div class="buttons">
-                    <button class="game-button small" id="easy-mode" type="button">EASY</button>
-                    <button class="game-button small" id="medium-mode" type="button">MEDIUM</button>
-                    <button class="game-button small" id="hard-mode" type="button">HARD</button>
-                </div>
+                <p class="game-button label ">DIFFICULTY:</p>
+                <div class="game-button clickable" id="easy-mode">EASY</div>
+                <div class="game-button clickable" id="medium-mode">MEDIUM</div>
+                <div class="game-button clickable" id="hard-mode">HARD</div>
             </div>
         </div>
         <div id="main-text">
@@ -33,16 +38,30 @@
         </div>
         <div class="controls" id="right-panel">
             <div id="music" class="button-row">
-                <p>AUDIO:</p>
-                <div class="buttons">
-                    <button class="game-button small" id="music-toggle" type="button">MUSIC</button>
-                    <button class="game-button small" id="sound-toggle" type="button">SOUND</button>
-                </div>
+                <p class="game-button label">AUDIO:</p>
+                <div class="game-button clickable" id="music-toggle">MUSIC</div>
+                <div class="game-button clickable" id="sound-toggle">SOUND</div>
             </div>
-            <button type="button" id="start" class="game-button">RESET GAME</button>
+            <div id="start" class="game-button">RESET GAME</div>
         </div>
     </header>
     <section id="game">
+        <div id="victory-screen">
+            <h2>VICTORY!</h2>
+            <img id="trophy" src="images/backgrounds/trophy_remix_by_monsterbraingames.svg" alt="a trophy">
+            <div id="score-details">
+                <p class="score-text"><span id="time-score">0</span> seconds</p>
+                <p class="score-text"><span id="click-score">0</span> clicks</p>
+            </div>
+            <div class="score-text" id="total">TOTAL SCORE: <span id="score">0</span></div>
+            <div id="stars-container">
+                <div id="star1" class="star"><img src="images/backgrounds/blackStar.svg" alt="a black star"></div>
+                <div id="star2" class="star"><img src="images/backgrounds/blackStar.svg" alt="a black star"></div>
+                <div id="star3" class="star"><img src="images/backgrounds/blackStar.svg" alt="a black star"></div>
+                <div id="star4" class="star"><img src="images/backgrounds/blackStar.svg" alt="a black star"></div>
+                <div id="star5" class="star"><img src="images/backgrounds/blackStar.svg" alt="a black star"></div>
+            </div>       
+        </div>
         <div id="main-grid" class="four-columns">
             <div class="box" id="box1"></div>
             <div class="box" id="box2"></div>
@@ -64,6 +83,6 @@
     </section>
     <footer id="main-footer">
     </footer>
-    <script src="/memory.js"></script>
+    <script src="memory.js"></script>
 </body>
 </html>
