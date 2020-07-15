@@ -523,7 +523,3 @@ confirmButton.addEventListener("click", ()=> {
     document.querySelector("#start-overlay").style.transform = "scale(0)";
     setTimeout(playMusic, 1000);
 });
-
-
-
-
