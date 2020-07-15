@@ -73,6 +73,7 @@ let setThree = [
     "url(images/setThree/furry.jpg)"
 ];
 
+let body = document.querySelector("body");
 let boxes = document.getElementsByClassName("box");
 let start = document.querySelector("#start");
 let gameSize = 16;
@@ -104,13 +105,16 @@ let confirmButton = document.querySelector("#confirm-button");
 let mainGrid = document.querySelector("#main-grid");
 let victoryScreen = document.querySelector("#victory-screen");
 
+// MAKE BODY INVISIBLE
+
+body.style.display = "none";
 
 // CREATE A IMAGE SET 
 
 const chooseImages = () => {
     let chosenImage;
     images = [];
-    for (let z = 0; z < (gameSize / 2); z++) {
+    for (let numberOfImages = 0; numberOfImages < (gameSize / 2); numberOfImages++) {
         while(true) {
             chosenImage = chosenSet[Math.floor(Math.random()*chosenSet.length)]
             if (images.indexOf(chosenImage) == -1) {
@@ -178,7 +182,7 @@ const reset = () => {
     }
 }
 
-// CLICK EVENTS FOR BOXES - REVEAL HIDDEN COLOR
+// CLICK EVENTS FOR BOXES - REVEAL HIDDEN IMAGE
 
 const addEvents = () => {
     for (let k=0; k<boxes.length; k++) {
@@ -523,3 +527,13 @@ confirmButton.addEventListener("click", ()=> {
     document.querySelector("#start-overlay").style.transform = "scale(0)";
     setTimeout(playMusic, 1000);
 });
+
+chosenSet.forEach(imageUrl => {
+    let img = new Image();
+    readyImg = imageUrl.replace("url(","").replace(")","");
+    img.src = readyImg;
+})
+
+window.onload = () => {
+    body.style.display = "block";
+}
