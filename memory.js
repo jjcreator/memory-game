@@ -528,7 +528,9 @@ confirmButton.addEventListener("click", ()=> {
     setTimeout(playMusic, 1000);
 });
 
-chosenSet.forEach(imageUrl => {
+let allSets = setOne.concat(setTwo).concat(setThree);
+
+allSets.forEach(imageUrl => {
     let img = new Image();
     readyImg = imageUrl.replace("url(","").replace(")","");
     img.src = readyImg;
