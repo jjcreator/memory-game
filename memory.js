@@ -105,10 +105,6 @@ let confirmButton = document.querySelector("#confirm-button");
 let mainGrid = document.querySelector("#main-grid");
 let victoryScreen = document.querySelector("#victory-screen");
 
-// MAKE BODY INVISIBLE
-
-body.style.display = "none";
-
 // CREATE A IMAGE SET 
 
 const chooseImages = () => {
@@ -442,10 +438,6 @@ const cacheSet = set => {
     )
 }
 
-window.onload = () => {
-    body.style.display = "block";
-}
-
 // INITIALIZE GAME
 
 addEvents();
@@ -479,7 +471,7 @@ setTwoButton.addEventListener("click", () => {
     setThreeButton.style.backgroundColor = "transparent"
 });
 setThreeButton.addEventListener("click", () => {
-    cacheSet(setTwo.concat(["images/backgrounds/star2.svg", "images/backgrounds/conifer.jpg"]));
+    cacheSet(setThree.concat(["images/backgrounds/star2.svg", "images/backgrounds/conifer.jpg"]));
     click();
     chosenSet = setThree;
     chosenTiles = "var(--third-tiles)";
