@@ -431,15 +431,31 @@ const gameDifficulty = (boardSize) => {
     randomizeImages();
     reset();
 }
+// CACHE IMAGES
+
+const cacheSet = set => {
+    set.forEach(imageUrl => {
+        let img = new Image();
+        readyImg = imageUrl.replace("url(","").replace(")","");
+        img.src = readyImg;
+    }
+    )
+}
+
+window.onload = () => {
+    body.style.display = "block";
+}
 
 // INITIALIZE GAME
 
 addEvents();
 randomizeImages();
+cacheSet(setOne.concat(["images/backgrounds/star2.svg", "images/backgrounds/seaclouds.jpg"]));
 start.addEventListener("click", randomizeImages);
 start.addEventListener("click", reset);
 start.addEventListener("click", click);
 setOneButton.addEventListener("click", () => {
+    cacheSet(setOne.concat(["images/backgrounds/star2.svg", "images/backgrounds/seaclouds.jpg"]));
     click();
     chosenSet = setOne;
     chosenTiles = "var(--first-tiles)";
@@ -451,6 +467,7 @@ setOneButton.addEventListener("click", () => {
     setThreeButton.style.backgroundColor = "transparent";
 });
 setTwoButton.addEventListener("click", () => {
+    cacheSet(setTwo.concat(["images/backgrounds/star2.svg", "images/backgrounds/stars.jpg"]));
     click();
     chosenSet = setTwo;
     chosenTiles = "var(--second-tiles)";
@@ -462,6 +479,7 @@ setTwoButton.addEventListener("click", () => {
     setThreeButton.style.backgroundColor = "transparent"
 });
 setThreeButton.addEventListener("click", () => {
+    cacheSet(setTwo.concat(["images/backgrounds/star2.svg", "images/backgrounds/conifer.jpg"]));
     click();
     chosenSet = setThree;
     chosenTiles = "var(--third-tiles)";
@@ -528,14 +546,4 @@ confirmButton.addEventListener("click", ()=> {
     setTimeout(playMusic, 1000);
 });
 
-let allSets = setOne.concat(setTwo).concat(setThree).concat(["images/backgrounds/conifer.jpg", "images/backgrounds/stars.jpg", "images/backgrounds/seaclouds.jpg"])
 
-allSets.forEach(imageUrl => {
-    let img = new Image();
-    readyImg = imageUrl.replace("url(","").replace(")","");
-    img.src = readyImg;
-})
-
-window.onload = () => {
-    body.style.display = "block";
-}
