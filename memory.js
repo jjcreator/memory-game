@@ -528,7 +528,7 @@ confirmButton.addEventListener("click", ()=> {
     setTimeout(playMusic, 1000);
 });
 
-let allSets = setOne.concat(setTwo).concat(setThree);
+let allSets = setOne.concat(setTwo).concat(setThree).concat(["images/backgrounds/conifer.jpg", "images/backgrounds/stars.jpg", "images/backgrounds/seaclouds.jpg"])
 
 allSets.forEach(imageUrl => {
     let img = new Image();
