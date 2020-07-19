@@ -441,14 +441,14 @@ body {
     }
 
     #victory-screen {
-        height: 45vw;
-        width: 45vw;
+        height: 40vw;
+        width: 40vw;
         border: 3px outset gold;
     }
 
     #victory-screen h2 {
         padding: 5px;
-        font-size: 20px;
+        font-size: 18px;
     }
 
     #score-details p {
@@ -457,7 +457,8 @@ body {
     }
     
     #total {
-        font-size: 20px;
+        font-size: 18px;
+        padding: 8px;
     }
     
     #stars-container {
@@ -468,7 +469,7 @@ body {
     }
     
     .star {
-        width: 25px;
+        width: 22px;
     }
 
     #trophy {
@@ -518,10 +519,6 @@ body {
 
     #timer {
         font-size: 30px;
-    }
-    
-    #start {
-        
     }
 
     #start:active {
