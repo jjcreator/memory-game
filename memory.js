@@ -81,6 +81,7 @@ let revealedBoxes = [];
 let clicks = 0;
 let title = document.querySelector("#title");
 let time = document.getElementById("time");
+let timerText = document.getElementById("timer");
 let elapsed = 0;
 let timing;
 let chosenSet = setOne;
@@ -105,7 +106,7 @@ let confirmButton = document.querySelector("#confirm-button");
 let mainGrid = document.querySelector("#main-grid");
 let victoryScreen = document.querySelector("#victory-screen");
 
-// CREATE A IMAGE SET 
+// CREATE AN IMAGE SET 
 
 const chooseImages = () => {
     let chosenImage;
@@ -122,10 +123,11 @@ const chooseImages = () => {
     }
 }
 
-// RESET GAME BOARD, RANDOMIZE POSITION OF IMAGES
+// RANDOMIZE POSITION OF IMAGES
 
 const randomizeImages = () => {
     chooseImages();
+    // modern version of the Fisher–Yates shuffle algorithm:
     const shuffle = array => {
         for(let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -150,7 +152,7 @@ const reset = () => {
     //reset button disappears
     start.style.display = "none";
     //timer disappears
-    document.getElementById("timer").style.display = "none";
+    timerText.style.display = "none";
     //options appear
     document.querySelector("#tile-select").style.display = "flex";
     document.querySelector("#difficulty").style.display = "flex";
@@ -169,10 +171,10 @@ const reset = () => {
 // CLICK EVENTS FOR BOXES - REVEAL HIDDEN IMAGE
 
 const addEvents = () => {
-    for (let k=0; k<boxes.length; k++) {
-        boxes[k].addEventListener("click", function() {
+    for (let i=0; i<boxes.length; i++) {
+        boxes[i].addEventListener("click", function() {
             //variable declarations
-            let myBox = this;
+            let selectedBox = this;
             let num = parseInt(this.id.match(/[0-9]+/g));
             //reset button appears
             start.style.display = "flex";
@@ -181,7 +183,7 @@ const addEvents = () => {
             document.querySelector("#difficulty").style.display = "none";
             document.querySelector("#music").style.display = "none";
             // starts timer
-            document.getElementById("timer").style.display = "block";
+            timerText.style.display = "block";
             if (clicks == 0) {
                 timing = setInterval(timer, 1000);
                 // disables text animation
@@ -191,24 +193,16 @@ const addEvents = () => {
                 title.textContent = "";
             }, 2000)
             }
-            // sets backgrounds back to tile back
-            const colorize = () => {
-                for (let n=0; n<boxes.length; n++) {
-                    if (!boxes[n].classList.contains("found")) {
-                    boxes[n].style.backgroundImage = chosenTiles;
-                    }
-                }
-            }
-            if (revealedBoxes[0] != this) {
+            if (revealedBoxes[0] != selectedBox) {
                 click();
                 clicks++;
                 if (revealedBoxes.length < 2) {
-                    myBox.style.backgroundImage = images[num - 1];
-                    revealedBoxes.push(myBox);
+                    selectedBox.style.backgroundImage = images[num - 1];
+                    revealedBoxes.push(selectedBox);
                 }
                 if (revealedBoxes.length == 2) {
                     if (revealedBoxes[0].style.backgroundImage != revealedBoxes[1].style.backgroundImage) {
-                        revealedBoxes = [];
+                        
                         for (let a=0; a<boxes.length; a++) {
                             boxes[a].classList.add("pointer-none");
                         }
@@ -219,7 +213,8 @@ const addEvents = () => {
                                     errorSound.play();
                                 }
                             }
-                            colorize();
+                            revealedBoxes.forEach(box => box.style.backgroundImage = chosenTiles)
+                            revealedBoxes = [];
                         }, 550);
                     }
                     else if (revealedBoxes[0].style.backgroundImage == revealedBoxes[1].style.backgroundImage) {
@@ -232,7 +227,6 @@ const addEvents = () => {
                             foundSound.play();
                         }
                         revealedBoxes = [];
-                        colorize();
                     }
                 }
             }
