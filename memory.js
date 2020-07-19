@@ -77,9 +77,9 @@ let body = document.querySelector("body");
 let boxes = document.getElementsByClassName("box");
 let start = document.querySelector("#start");
 let gameSize = 16;
-let randomizedArray = [];
 let revealedBoxes = [];
 let clicks = 0;
+let title = document.querySelector("#title");
 let time = document.getElementById("time");
 let elapsed = 0;
 let timing;
@@ -104,7 +104,6 @@ let soundMuted = false;
 let confirmButton = document.querySelector("#confirm-button");
 let mainGrid = document.querySelector("#main-grid");
 let victoryScreen = document.querySelector("#victory-screen");
-let title = document.querySelector("#title");
 
 // CREATE A IMAGE SET 
 
@@ -116,6 +115,7 @@ const chooseImages = () => {
             chosenImage = chosenSet[Math.floor(Math.random()*chosenSet.length)]
             if (images.indexOf(chosenImage) == -1) {
                 images.push(chosenImage);
+                images.push(chosenImage);
                 break;
             }
         }
@@ -125,27 +125,15 @@ const chooseImages = () => {
 // RESET GAME BOARD, RANDOMIZE POSITION OF IMAGES
 
 const randomizeImages = () => {
-    let usedOnce = [];
-    let usedTwice = [];
-    randomizedArray = [];
-    let image;
     chooseImages();
-    // loops infinitely until it fills the randomized array with gamesize/2 items
-    for (let i=0; i<gameSize; i++) {
-        while (true) {
-            image = images[Math.floor(Math.random()*images.length)];
-            if (usedOnce.indexOf(image) == -1) {
-                randomizedArray.push(image);
-                usedOnce.push(image);
-                break;
-            }
-            if (usedTwice.indexOf(image) == -1) {
-                randomizedArray.push(image);
-                usedTwice.push(image);
-                break;
-            }
+    const shuffle = array => {
+        for(let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
         }
+        return array;
     }
+    images = shuffle(images);
 }
 
 // RESET GAME STATE
@@ -168,7 +156,6 @@ const reset = () => {
     document.querySelector("#difficulty").style.display = "flex";
     document.querySelector("#music").style.display = "flex";
     //main text resets and animates
-    
     title.style.width = "50vw";
     title.textContent = "";
     title.classList.add("animated");
@@ -216,7 +203,7 @@ const addEvents = () => {
                 click();
                 clicks++;
                 if (revealedBoxes.length < 2) {
-                    myBox.style.backgroundImage = randomizedArray[num - 1];
+                    myBox.style.backgroundImage = images[num - 1];
                     revealedBoxes.push(myBox);
                 }
                 if (revealedBoxes.length == 2) {

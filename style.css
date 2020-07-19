@@ -32,6 +32,7 @@ body {
     height: 100%;
     width: 100vw;
     position: relative;
+    overflow: hidden;
 
 }
 /* ----------Start overlay----------*/
@@ -276,7 +277,7 @@ body {
     display: grid;
     max-width: fit-content;
     margin: 0 auto;
-    grid-gap: 25px;
+    grid-gap: 0px;
     align-items: center;
     justify-items: center;
     padding: 1vw;
@@ -286,8 +287,8 @@ body {
     background-image: var(--first-tiles);
     background-position: center;
     background-size: cover;
-    height: 9vw; 
-    width: 9vw;
+    height: 100%;
+    width: 100%;
     align-self: center;
     justify-self: center;
     position: relative;
@@ -301,18 +302,18 @@ body {
 }
 
 .four-columns {
-    grid-template-columns: repeat(4, 9vw);
-    grid-template-rows: repeat(4, 9vw);
+    grid-template-columns: repeat(4, 10vw);
+    grid-template-rows: repeat(4, 10vw);
 }
 
 .six-columns {
-    grid-template-columns: repeat(6, 9vw);
-    grid-template-rows: repeat(4, 9vw);
+    grid-template-columns: repeat(6, 10vw);
+    grid-template-rows: repeat(4, 10vw);
 }
 
 .nine-columns {
-    grid-template-columns: repeat(9, 9vw);
-    grid-template-rows: repeat(4, 9vw);
+    grid-template-columns: repeat(9, 10vw);
+    grid-template-rows: repeat(4, 10vw);
 }
 
 .found {
@@ -531,19 +532,20 @@ body {
         max-height: 80vh;
     }
 
-    #main-grid {
-        grid-gap: 6px;
-        justify-items: center;
-        align-items: center;
-        justify-items: center;
+    .four-columns {
+        grid-template-columns: repeat(8, 12vw);
+        grid-template-rows: repeat(2, 12vw);
     }
 
-    .box {
-        width: 9vw;
-        height: 9vw;
-        
+    .six-columns {
+        grid-template-columns: repeat(8, 12vw);
+        grid-template-rows: repeat(3, 12vw);
     }
 
+    .nine-columns {
+        grid-template-columns: repeat(9, 10vw);
+        grid-template-rows: repeat(4, 10vw);
+    }
 }
 
 @media only screen and (max-width: 719px) and (min-height: 568px) {
@@ -622,11 +624,6 @@ body {
         font-size: 12px;
     }
 
-    #main-grid {
-        
-        grid-gap: 0px;
-    }
-
     .four-columns {
         grid-template-columns: repeat(4, 22vw);
         grid-template-rows: repeat(4, 22vw);
@@ -641,11 +638,6 @@ body {
     .nine-columns {
         grid-template-columns: repeat(6, 16vw);
         grid-template-rows: repeat(6, 16vw);
-    }
-
-    .box {
-        width: 100%;
-        height: 100%;
     }
 
     #victory-screen {
@@ -684,7 +676,7 @@ body {
     }
 }
 
-@media only screen and (min-width: 720px) and (max-width: 1480px) {
+@media only screen and (min-width: 720px) and (max-width: 1366px) and (orientation: portrait) {
     #start-message {
         width: 45%;
         height: 45%;
@@ -706,9 +698,39 @@ body {
         margin-right: 22px;
     }
 
-    #main-grid {
-        grid-gap: 10px;
+    .four-columns {
+        grid-template-columns: repeat(4, 22vw);
+        grid-template-rows: repeat(4, 22vw);
     }
 
+    .six-columns {
+        grid-template-columns: repeat(4, 18vw);
+        grid-template-rows: repeat(6, 18vw);
+
+    }
+
+    .nine-columns {
+        grid-template-columns: repeat(6, 15vw);
+        grid-template-rows: repeat(6, 15vw);
+    }
+
+}
+
+@media only screen and (min-width: 720px) and (max-width: 1366px) and (orientation: landscape) and (min-height: 500px) {
+    .four-columns {
+        grid-template-columns: repeat(4, 14vw);
+        grid-template-rows: repeat(4, 14vw);
+    }
+
+    .six-columns {
+        grid-template-columns: repeat(6, 14vw);
+        grid-template-rows: repeat(4, 14vw);
+
+    }
+
+    .nine-columns {
+        grid-template-columns: repeat(6, 10vw);
+        grid-template-rows: repeat(6, 10vw);
+    }
 }
 
