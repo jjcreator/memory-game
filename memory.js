@@ -104,6 +104,7 @@ let soundMuted = false;
 let confirmButton = document.querySelector("#confirm-button");
 let mainGrid = document.querySelector("#main-grid");
 let victoryScreen = document.querySelector("#victory-screen");
+let title = document.querySelector("#title");
 
 // CREATE A IMAGE SET 
 
@@ -167,10 +168,10 @@ const reset = () => {
     document.querySelector("#difficulty").style.display = "flex";
     document.querySelector("#music").style.display = "flex";
     //main text resets and animates
-    let h1 = document.querySelector("#title");
-    h1.style.width = "50vw";
-    h1.textContent = "";
-    h1.classList.add("animated");
+    
+    title.style.width = "50vw";
+    title.textContent = "";
+    title.classList.add("animated");
     //boxes are reset
     for (let i=0; i<boxes.length; i++) {
         boxes[i].classList.remove("found");
@@ -186,20 +187,22 @@ const addEvents = () => {
             //variable declarations
             let myBox = this;
             let num = parseInt(this.id.match(/[0-9]+/g));
-            let h1 = document.querySelector("#title");
             //reset button appears
             start.style.display = "flex";
             // makes options disappear
             document.querySelector("#tile-select").style.display = "none";
             document.querySelector("#difficulty").style.display = "none";
             document.querySelector("#music").style.display = "none";
-            // disables text animation
-            h1.classList.remove("animated");
-            h1.textContent = "Let's go!!!";
             // starts timer
             document.getElementById("timer").style.display = "block";
             if (clicks == 0) {
                 timing = setInterval(timer, 1000);
+                // disables text animation
+                title.classList.remove("animated");
+                title.textContent = "Let's go!!!";
+                setTimeout(()=> {
+                title.textContent = "";
+            }, 2000)
             }
             // sets backgrounds back to tile back
             const colorize = () => {
@@ -262,8 +265,8 @@ const victoryCheck = () => {
         }
     if (victory == gameSize) {
         clearInterval(timing);
-        document.querySelector("#title").style.width = "80vw";
-        document.querySelector("#title").style.marginRight = "0";
+        title.style.width = "80vw";
+        title.style.marginRight = "0";
         themeMusic.pause();
         if (soundMuted == false) {
             victorySound.volume = 0.3;
@@ -271,7 +274,7 @@ const victoryCheck = () => {
         }
         victoryScreenOn();
         setTimeout(playMusic, 9000);
-        document.querySelector("#title").textContent = `BOOM !!!`;
+        title.textContent = `BOOM !!!`;
     }
     }
 }

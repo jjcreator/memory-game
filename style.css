@@ -55,7 +55,6 @@ body {
     flex-direction: column;
     position: absolute;
     width: 35%;
-    height: 35%;
     background-color: rgba(26, 168, 233, 0.9);
     z-index: 100;
     padding: 10px;
@@ -77,7 +76,7 @@ body {
 }
 
 #confirm-button {
-    margin-top: auto;
+    margin-top: 5%;
     margin-bottom: 10px;
     width: 40%;
     max-width: 120px;
@@ -100,7 +99,6 @@ body {
 
 #confirm-button:active {
     border: 2px solid white;
-    
 }
 
 
@@ -543,19 +541,18 @@ body {
     .box {
         width: 9vw;
         height: 9vw;
-        border: 1px white solid;
+        
     }
 
 }
 
 @media only screen and (max-width: 719px) and (min-height: 568px) {
     #start-message {
-        width: 50%;
-        height: 40%;
+        width: 70%;
     }
 
     #start-message h1 {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     #start-message p {
@@ -567,15 +564,22 @@ body {
     }
 
     #left-panel {
-        width: 40%;
+        width: 70%;
     }
 
     #main-text {
-        width: 40%;
+        position: absolute;
+        top: 12vh;
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .animated::before {
+        font-size: 18px;
     }
 
     #right-panel {
-        width: 20%;
+        width: 30%;
     }
 
     #music {
@@ -600,7 +604,7 @@ body {
     }
     
     #title {
-        font-size: 12px;
+        font-size: 18px;
         margin: 0;
         padding: 0;
         max-width: 60%;
@@ -619,18 +623,31 @@ body {
     }
 
     #main-grid {
-        grid-template-columns: repeat(6, 14vw);
-        grid-template-rows: repeat(auto-fill, 14vw);
-        grid-gap: 9px;
-        justify-items: center;
-        align-items: center;
-        justify-items: center;
+        
+        grid-gap: 0px;
+    }
+
+    .four-columns {
+        grid-template-columns: repeat(4, 22vw);
+        grid-template-rows: repeat(4, 22vw);
+    }
+
+    .six-columns {
+        grid-template-columns: repeat(4, 20vw);
+        grid-template-rows: repeat(6, 20vw);
+
+    }
+
+    .nine-columns {
+        grid-template-columns: repeat(6, 16vw);
+        grid-template-rows: repeat(6, 16vw);
     }
 
     .box {
-        width: 14vw;
-        height: 14vw;
+        width: 100%;
+        height: 100%;
     }
+
     #victory-screen {
         height: 50vh;
         width: 50vh;
@@ -639,7 +656,7 @@ body {
 
     #victory-screen h2 {
         padding: 5px;
-        font-size: 35px;
+        font-size: 25px;
     }
 
     #score-details p {
@@ -648,7 +665,7 @@ body {
     }
     
     #total {
-        font-size: 20px;
+        font-size: 18px;
     }
     
     #stars-container {
@@ -658,7 +675,7 @@ body {
     }
     
     .star {
-        width: 50px;
+        width: 35px;
     }
 
     #trophy {
