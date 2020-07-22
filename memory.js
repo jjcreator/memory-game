@@ -233,7 +233,6 @@ const addEvents = () => {
         victoryCheck();
     }
         )};
-
 };
 
 // CHECK FOR VICTORY
@@ -265,7 +264,7 @@ const bling = (value, textNode, time, basis) => {
     return new Promise((resolve, reject) => {    
         let increase = 0;
         const countUp = (value, textNode) => {
-            if (increase === value) {
+            if (increase === value || victoryScreen.style.display === "none") {
                 clearInterval(counting);
                 resolve();
             }
@@ -323,17 +322,16 @@ const victoryScreenOn = () => {
             .then(()=> bling(score, scoreText, 7.5, 25)
                 .then(()=> drawStars(awardStars()))));
 
-const drawStars = (starNumber) => {
+    const drawStars = (starNumber) => {
     let goldenStar = "<img src='./images/backgrounds/star2.svg' alt='a golden star'>";
-    for (let i=1; i <= starNumber; i++) {
+        for (let i=1; i <= starNumber; i++) {
         setTimeout(()=> {
             let currentStar = "#star" + i.toString();
             document.querySelector(currentStar).innerHTML = goldenStar;
-            beepSound.play();
-        }, i * 500)  
+            if(victory.screen.style.display != "none") beepSound.play();
+            }, i * 500)  
+        }
     }
-
-}
 }
 
 const resetVictory = () => {
