@@ -328,7 +328,7 @@ const victoryScreenOn = () => {
         setTimeout(()=> {
             let currentStar = "#star" + i.toString();
             document.querySelector(currentStar).innerHTML = goldenStar;
-            if(victory.screen.style.display != "none") beepSound.play();
+            victoryScreen.style.display != "none" ? beepSound.play(): null;
             }, i * 500)  
         }
     }
