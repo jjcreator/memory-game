@@ -1,6 +1,6 @@
 # Memory game
 
-My take on the classic tiles memory game. This one has a timer built in, so you have to be fast! 3 levels of difficulty, 3 different tilesets, so that you do not get bored right away. Music and sound effects (optional). 
+My take on the classic tiles memory game. This one has a timer built in, so you have to be fast! 3 levels of difficulty, 3 different tilesets, so that you don't get bored right away. Music and sound effects (optional). 
 
 [![dorianwilczynski.pl](/memory.png)](https://jjcreator.github.io/Memory-Game/)
 
