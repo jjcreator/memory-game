@@ -351,8 +351,7 @@ const playMusic = () => {
     themeMusic.volume = 0.25;
     if (!musicMuted) {
         themeMusic.currentTime = 0;
-        themeMusic.play();
-        
+        themeMusic.play();  
     }
     else {
         themeMusic.pause();
@@ -366,8 +365,7 @@ const click = () => {
     clickSound.volume = 0.2;
     if (soundMuted == false) { 
     clickSound.play();
-}
-    
+    }
 }
 
 // TIMER
