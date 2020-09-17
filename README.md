@@ -28,7 +28,7 @@ One of my first projects created while learning HTML/CSS/JS. The goal was to cre
 
 ## Launch
 
-Hosted on Github Pages - https://jjcreator.github.io/Memory-Game/
+Hosted on Github Pages - https://jjcreator.github.io/memory-game/
 
 ## Sources
 
