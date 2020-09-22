@@ -423,7 +423,7 @@ const cacheSet = set => {
 
 addEvents();
 randomizeImages();
-cacheSet(setOne.concat(["images/backgrounds/star2.svg", "images/backgrounds/seaclouds.jpg", "images/backgrounds/stars.jpg", "images/backgrounds/conifer.jpg"]));
+cacheSet(setOne.concat(["images/backgrounds/star2.svg", "images/backgrounds/seaclouds.jpg", "images/backgrounds/stars.jpg", "images/backgrounds/conifer.jpg", "images/backgrounds/glass.jpg", "images/backgrounds/leaves.jpg" ]));
 start.addEventListener("click", randomizeImages);
 start.addEventListener("click", reset);
 start.addEventListener("click", click);
