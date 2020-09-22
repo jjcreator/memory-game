@@ -410,6 +410,7 @@ const gameDifficulty = (boardSize) => {
 // CACHE IMAGES
 
 const cacheSet = set => {
+
     set.forEach(imageUrl => {
         let img = new Image();
         readyImg = imageUrl.replace("url(","").replace(")","");
@@ -422,7 +423,7 @@ const cacheSet = set => {
 
 addEvents();
 randomizeImages();
-cacheSet(setOne.concat(["images/backgrounds/star2.svg", "images/backgrounds/seaclouds.jpg"]));
+cacheSet(setOne.concat(["images/backgrounds/star2.svg", "images/backgrounds/seaclouds.jpg", "images/backgrounds/stars.jpg", "images/backgrounds/conifer.jpg"]));
 start.addEventListener("click", randomizeImages);
 start.addEventListener("click", reset);
 start.addEventListener("click", click);
@@ -439,7 +440,7 @@ setOneButton.addEventListener("click", () => {
     setThreeButton.style.backgroundColor = "transparent";
 });
 setTwoButton.addEventListener("click", () => {
-    cacheSet(setTwo.concat(["images/backgrounds/star2.svg", "images/backgrounds/stars.jpg"]));
+    cacheSet(setTwo.concat(["images/backgrounds/star2.svg"]));
     click();
     chosenSet = setTwo;
     chosenTiles = "var(--second-tiles)";
@@ -451,7 +452,7 @@ setTwoButton.addEventListener("click", () => {
     setThreeButton.style.backgroundColor = "transparent"
 });
 setThreeButton.addEventListener("click", () => {
-    cacheSet(setThree.concat(["images/backgrounds/star2.svg", "images/backgrounds/conifer.jpg"]));
+    cacheSet(setThree.concat(["images/backgrounds/star2.svg"]));
     click();
     chosenSet = setThree;
     chosenTiles = "var(--third-tiles)";
